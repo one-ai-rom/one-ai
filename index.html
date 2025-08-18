@@ -1,1423 +1,1901 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OneAI Rom by MatteoMeo</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>OneAI — Kusoi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+      :root{
+        --bg:#071028;
+        --card:#0f1624;
+        --muted:#98a6bf;
+        --accent1:linear-gradient(135deg,#7b68ee 0%,#6bd6ff 100%);
+        --accent2:#7b68ee;
+        --glass:rgba(255,255,255,0.04);
+        --radius:14px;
+        --max-width:1100px;
+        --warning-bg:rgba(255,193,7,0.15);
+        --warning-border:#ffc107;
+        --success-bg:rgba(40,167,69,0.15);
+        --success-border:#28a745;
+        --info-bg:rgba(23,162,184,0.15);
+        --info-border:#17a2b8;
+        --danger-bg:rgba(220,53,69,0.15);
+        --danger-border:#dc3545;
       }
 
-      body {
-        background: #1a1a2f;
-        color: #b0c4de;
-        min-height: 100vh;
-        overflow-x: hidden;
-        position: relative;
+      *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;smooth:always}
+      html,body{height:100%}
+      body{
+        margin:0;
+        background:radial-gradient(1200px 600px at 10% 10%, rgba(123,104,238,0.08), transparent 10%),
+          radial-gradient(1000px 500px at 90% 90%, rgba(107,214,255,0.05), transparent 10%),
+          var(--bg);
+        color:#e6eef8;
+        min-height:100%;
+        -webkit-font-smoothing:antialiased;
+        text-rendering:optimizeLegibility;
+        overflow-x:hidden;
       }
 
-      .container {
-        padding: 1rem;
-        width: 100%;
+      .wrap{max-width:var(--max-width);margin:48px auto;padding:28px}
+
+      header{
+        display:flex;
+        align-items:center;
+        gap:20px;
+        animation:fadeInDown 0.8s ease-out;
+      }
+      
+      .brand{
+        display:flex;
+        gap:16px;
+        align-items:center;
+        transition:transform 0.3s ease;
+      }
+      
+      .brand:hover{transform:scale(1.02)}
+      
+      .logo{
+        width:80px;
+        height:80px;
+        border-radius:14px;
+        display:grid;
+        place-items:center;
+        background:linear-gradient(180deg,#111827, rgba(255,255,255,0.02));
+        box-shadow:0 6px 30px rgba(11,17,30,0.6);
+        animation:float 6s ease-in-out infinite;
+        transition:transform 0.3s ease,box-shadow 0.3s ease;
+        overflow:hidden;
+      }
+      
+      .logo:hover{
+        transform:scale(1.1);
+        box-shadow:0 12px 40px rgba(123,104,238,0.4);
       }
 
-      header {
-        padding: 2rem 0;
+      .logo img{
+        width:70px;
+        height:70px;
+        object-fit:cover;
+        border-radius:24px;
       }
+      
+      .logo img.fading {
+        opacity:0;
+        transform:scale(0.98);
+      }
+      
+      .logo svg{width:64px;height:64px}
+      h1{font-size:20px;margin:0;font-weight:700;letter-spacing:-0.2px}
+      .tag{font-size:13px;color:var(--muted)}
 
-      header img {
-        max-width: 70%;
+      nav{
+        margin-left:auto;
+        display:flex;
+        gap:12px;
+        align-items:center;
+        animation:fadeInRight 0.8s ease-out 0.2s both;
       }
-
-      h1 {
-        font-size: 2.5rem;
-        line-height: 1.2;
-        padding: 0 1rem;
-      }
-
-      .content {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .card {
-        padding: 1.5rem;
-        margin: 0 0.5rem;
-      }
-
-      .card h2 {
-        font-size: 1.5rem;
-      }
-
-      video {
-        border-radius: 15px;
-      }
-
-      .pricing-card {
-        padding: 1.5rem;
-        margin: 0 1rem;
-        width: 500px
-      }
-
-      .button-group {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0 1rem;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 1rem;
-        font-size: 1.1rem;
-      }
-      input,
-      textarea,
-      button {
-        font-size: 16px !important;
-        min-height: 44px !important;
-      }
-      @media (hover: none) {
-        .card:hover {
-          transform: none;
-          box-shadow: none;
-        }
-        .btn:hover {
-          transform: none !important;
-        }
-      }
-      @media (max-width: 480px) {
-        h1 {
-          font-size: 2rem;
-        }
-
-        .card {
-          border-radius: 15px;
-          padding: 1rem;
-        }
-
-        .review-card {
-          padding: 1rem;
-        }
-
-        .credits-header {
-          font-size: 2rem;
-        }
-
-        .section-title {
-          font-size: 1.5rem;
-        }
-      }
-      html,
-      body {
-        overflow-x: hidden;
-        max-width: 100%;
-      }
-      @media (prefers-reduced-motion: no-preference) {
-        html {
-          scroll-behavior: smooth;
-        }
-      }
-      html {
-        overflow-anchor: none;
-      }
-      ::-webkit-scrollbar {
-        width: 14px;
-        height: 14px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: rgba(10, 10, 26, 0.2);
-        border-radius: 12px;
-        border: 1px solid rgba(123, 104, 238, 0.15);
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #7b68ee, #add8e6);
-        border-radius: 12px;
-        border: 2px solid rgba(0, 0, 0, 0.4);
-        box-shadow: 0 0 12px rgba(123, 104, 238, 0.5);
-        transition: all 0.3s ease;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #add8e6, #7b68ee);
-        box-shadow: 0 0 18px rgba(123, 104, 238, 0.7);
-        transform: scale(1.1);
-      }
-
-      * {
-        scrollbar-width: thin;
-        scrollbar-color: #7b68ee rgba(10, 10, 26, 0.2);
-      }
-
-      @keyframes scroll-glow {
-        0%,
-        100% {
-          box-shadow: 0 0 12px rgba(123, 104, 238, 0.4);
-        }
-        50% {
-          box-shadow: 0 0 20px rgba(123, 104, 238, 0.7);
-        }
-      }
-
-      ::-webkit-scrollbar-thumb {
-        animation: scroll-glow 2.5s ease-in-out infinite;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-      }
-
-      header {
-        text-align: center;
-        padding: 5rem 0;
-        background: linear-gradient(135deg, #1c1c2e, #0a0a1a);
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-      }
-
-      header::before {
-        content: "";
-        position: absolute;
-        top: -75%;
-        left: -75%;
-        width: 250%;
-        height: 250%;
-        background: radial-gradient(
-          circle,
-          rgba(123, 104, 238, 0.4),
-          transparent 70%
-        );
-        transform: rotate(30deg);
-        animation: cosmicPulse 20s ease-in-out infinite;
-        z-index: -1;
-      }
-
-      header img {
-        max-width: 320px;
-        height: auto;
-        margin: 0 auto;
-        display: block;
-        filter: drop-shadow(0 0 20px rgba(123, 104, 238, 0.6));
-        animation: floatImage 4s ease-in-out infinite;
-      }
-
-      h1 {
-        font-size: 4rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(45deg, #7b68ee, #add8e6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 20px rgba(123, 104, 238, 0.4);
-        animation: textGlow 3s ease-in-out infinite;
-      }
-
-      .content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2.5rem;
-        margin: 3rem 0;
-      }
-
-      .card {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 2rem;
-        border-radius: 20px;
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(123, 104, 238, 0.2);
-        transition: all 0.4s ease;
-        position: relative;
-        overflow: hidden;
-        animation: fadeIn 1s ease-in-out;
-      }
-
-      .card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(123, 104, 238, 0.3),
-          transparent
-        );
-        transition: left 0.6s ease;
-      }
-
-      .card:hover::before {
-        left: 100%;
-      }
-
-      .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 30px rgba(123, 104, 238, 0.4);
-      }
-
-      .card h2 {
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: #add8e6;
-        text-shadow: 0 0 10px rgba(173, 216, 230, 0.4);
-        margin-bottom: 1rem;
-      }
-
-      .card p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #b0c4de;
-      }
-
-      .draw-line {
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          #add8e6 50%,
-          transparent
-        );
-        position: relative;
-        margin: 2rem 0;
-        border-radius: 3px;
-        transition: all 0.5s ease;
-      }
-
-      .draw-line::before {
-        content: "";
-        position: absolute;
-        top: -8px;
-        left: 0;
-        width: 100%;
-        height: 16px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(123, 104, 238, 0.2),
-          transparent
-        );
-        filter: blur(12px);
-        z-index: -1;
-      }
-
-      .draw-line::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -150%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.4),
-          transparent
-        );
-        animation: shineLine 2s ease-in-out infinite;
-      }
-
-      .draw-line:hover {
-        height: 4px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          #7b68ee 50%,
-          transparent
-        );
-        box-shadow: 0 0 15px rgba(123, 104, 238, 0.4);
-      }
-
-      video {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0 0 25px rgba(123, 104, 238, 0.4);
-        transition: transform 0.4s ease;
-      }
-
-      video:hover {
-        transform: scale(1.02);
-      }
-
-      .download-container {
-        position: relative;
-        overflow: hidden;
-        padding: 3rem 0;
-      }
-
-      .pricing-card {
-        background: linear-gradient(135deg, #1c1c2e, #2a2a4a);
-        padding: 2.5rem;
-        border-radius: 25px;
-        border: 1px solid rgba(123, 104, 238, 0.2);
-        backdrop-filter: blur(15px);
-        box-shadow: 0 0 25px rgba(123, 104, 238, 0.15);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        cursor: default;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .pricing-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 40px rgba(123, 104, 238, 0.3);
-      }
-
-      h1.download-title {
-        font-size: 3rem;
-        font-weight: 700;
-        text-align: center;
-        color: #add8e6;
-        text-shadow: 0 0 15px rgba(173, 216, 230, 0.4);
-        margin-bottom: 2rem;
-        animation: fadeIn 1s ease-in-out;
-      }
-
-      h2.card-title {
-        font-size: 2rem;
-        font-weight: 600;
-        text-align: center;
-        color: #7b68ee;
-        text-shadow: 0 0 10px rgba(123, 104, 238, 0.3);
-        margin-bottom: 1.5rem;
-        animation: slideUp 0.8s ease-in-out;
-      }
-
-      .model-section {
-        margin-bottom: 2.5rem;
-        text-align: center;
-      }
-
-      .model-section p {
-        font-size: 1.2rem;
-        color: #b0c4de;
-        margin-bottom: 0.8rem;
-        animation: fadeIn 1.2s ease-in-out;
-      }
-
-      .button-group {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: #1c1c2e;
-        background: linear-gradient(90deg, #7b68ee, #add8e6);
-        padding: 0.9rem 2rem;
-        border: none;
-        border-radius: 12px;
+      
+      .btn{
+        background:var(--glass);
+        border:1px solid rgba(255,255,255,0.04);
+        padding:10px 14px;
+        border-radius:12px;
+        color:inherit;
+        text-decoration:none;
+        font-weight:600;
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+        position:relative;
+        overflow:hidden;
+        font-size:14px;
+        white-space:nowrap;
         cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-        position: relative;
-        overflow: hidden;
+      }
+      
+      .btn::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:-100%;
+        width:100%;
+        height:100%;
+        background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
+        transition:left 0.5s ease;
+      }
+      
+      .btn:hover{
+        transform:translateY(-2px);
+        box-shadow:0 8px 25px rgba(123,104,238,0.2);
+        border-color:rgba(123,104,238,0.3);
+      }
+      
+      .btn:hover::before{left:100%}
+      
+      .cta{
+        background:var(--accent1);
+        color:#071028;
+        padding:10px 16px;
+        border-radius:12px;
+        border:none;
+        cursor:pointer;
+        font-weight:600;
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+        position:relative;
+        overflow:hidden;
+      }
+      
+      .cta:hover{
+        transform:translateY(-2px) scale(1.05);
+        box-shadow:0 12px 30px rgba(123,104,238,0.4);
       }
 
-      .btn.base {
-        background: linear-gradient(90deg, #add8e6, #7b68ee);
+      #installGuide {
+        background: var(--accent1);
+        color: #071028;
+        border: none;
       }
 
-      .btn::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.3),
-          transparent
+      #installGuide:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 12px 30px rgba(123, 104, 238, 0.4);
+        border-color: transparent;
+      }
+
+      main{
+        display:grid;
+        grid-template-columns:1fr 420px;
+        gap:28px;
+        margin-top:28px;
+        align-items:start;
+        animation:fadeInUp 0.8s ease-out 0.3s both;
+      }
+
+      .main-content{
+        display:flex;
+        flex-direction:column;
+        gap:28px;
+      }
+
+      .hero{
+        padding:28px;
+        border-radius:18px;
+        background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+        backdrop-filter:blur(6px);
+        transition:transform 0.3s ease,box-shadow 0.3s ease;
+        position:relative;
+        overflow:hidden;
+      }
+
+      .hero::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        border-radius:18px;
+        padding:3px;
+        background:linear-gradient(45deg, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff
         );
-        transition: left 0.5s ease;
+        background-size:400% 400%;
+        mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite:xor;
+        -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;
+        animation:gradientShift 4s ease-in-out infinite;
+        z-index:-1;
+      }
+      
+      .hero:hover{
+        transform:translateY(-2px);
+        box-shadow:0 20px 60px rgba(123,104,238,0.1);
+      }
+      
+      .eyebrow{
+        display:block;
+        text-align:center;
+        padding:6px 10px;
+        border-radius:999px;
+        background:rgba(123,104,238,0.12);
+        color:#bfcff6;
+        font-weight:700;
+        font-size:12px;
+        animation:pulse 2s ease-in-out infinite;
+        margin:0 auto 16px auto;
+        width:fit-content;
+      }
+      
+      .headline{
+        font-size:28px;
+        margin:0 0 12px 0;
+        color:#eaf2ff;
+        animation:fadeInUp 0.8s ease-out 0.5s both;
+        text-align:center;
+      }
+      
+      .lead{
+        color:var(--muted);
+        line-height:1.6;
+        margin:0 0 20px 0;
+        animation:fadeInUp 0.8s ease-out 0.6s both;
+        text-align:center;
       }
 
-      .btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(123, 104, 238, 0.5);
-        opacity: 0.95;
+      .features{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+        animation:fadeInUp 0.8s ease-out 0.7s both;
+      }
+      
+      .feature{
+        padding:12px;
+        border-radius:12px;
+        background:rgba(255,255,255,0.02);
+        border:1px solid rgba(255,255,255,0.02);
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+        position:relative;
+        overflow:hidden;
+      }
+      
+      .feature::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:-100%;
+        width:100%;
+        height:2px;
+        background:var(--accent1);
+        transition:left 0.4s ease;
+      }
+      
+      .feature:hover{
+        transform:translateY(-3px);
+        background:rgba(255,255,255,0.04);
+        border-color:rgba(123,104,238,0.2);
+      }
+      
+      .feature:hover::before{left:0}
+      
+      .feature h3{margin:0;font-size:14px;color:#dce9ff;transition:color 0.3s ease}
+      .feature p{margin:6px 0 0;color:var(--muted);font-size:13px;transition:color 0.3s ease}
+      .feature:hover h3{color:#ffffff}
+      .feature:hover p{color:#b8c9e0}
+
+      .cards{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:14px;
+        margin-top:26px;
+        animation:fadeInUp 0.8s ease-out 0.8s both;
+      }
+      
+      .card{
+        padding:16px;
+        border-radius:12px;
+        background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+        border:1px solid rgba(255,255,255,0.02);
+        transition:all 0.4s cubic-bezier(0.2,0.9,0.2,1);
+        position:relative;
+        overflow:hidden;
+      }
+      
+      .card::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        height:2px;
+        background:var(--accent1);
+        transform:scaleX(0);
+        transition:transform 0.3s ease;
+      }
+      
+      .card:hover{
+        transform:translateY(-8px) scale(1.02);
+        box-shadow:0 18px 60px rgba(11,17,30,0.55);
+        border-color:rgba(123,104,238,0.3);
+      }
+      
+      .card:hover::before{transform:scaleX(1)}
+      
+      .card h3{margin:0 0 8px 0;transition:color 0.3s ease}
+      .card p{margin:0;color:var(--muted);font-size:13px;transition:color 0.3s ease}
+      .card:hover h3{color:#ffffff}
+      .card:hover p{color:#b8c9e0}
+
+      .credits-section{
+        padding:28px;
+        border-radius:18px;
+        background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+        border:1px solid rgba(255,255,255,0.03);
+        backdrop-filter:blur(6px);
+        transition:transform 0.3s ease,box-shadow 0.3s ease;
+        position:relative;
+        overflow:hidden;
+        animation:fadeInUp 0.8s ease-out 0.9s both;
       }
 
-      .btn:hover::before {
-        left: 100%;
+      .credits-section::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        border-radius:18px;
+        padding:2px;
+        background:linear-gradient(45deg, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff
+        );
+        background-size:400% 400%;
+        mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite:xor;
+        -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;
+        animation:gradientShift 4s ease-in-out infinite;
+        z-index:-1;
+      }
+      
+      .credits-section:hover{
+        transform:translateY(-2px);
+        box-shadow:0 20px 60px rgba(123,104,238,0.1);
       }
 
-      .review-container {
-        max-width: 800px;
-        margin: 0 auto;
+      .credits-section h3{
+        margin:0 0 16px 0;
+        font-size:20px;
+        color:#eaf2ff;
+        text-align:center;
       }
 
-      .review-card {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 2rem;
-        border-radius: 20px;
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(123, 104, 238, 0.2);
-        margin: 2rem 0;
-        transition: all 0.4s ease;
-        animation: fadeIn 1s ease-in-out;
+      .credits-section p{
+        margin:0 0 20px 0;
+        color:var(--muted);
+        text-align:center;
+        font-size:14px;
       }
 
-      .review-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0 25px rgba(123, 104, 238, 0.3);
+      .credits-grid{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+      }
+      
+      .person{
+        padding:16px;
+        border-radius:12px;
+        background:rgba(255,255,255,0.01);
+        border:1px solid rgba(255,255,255,0.02);
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+        opacity:0;
+        transform:translateY(15px);
+        animation:fadeInUp 0.5s ease-out forwards;
       }
 
-      .review-header {
-        display: block;
-        margin-bottom: 1rem;
+      .person:nth-child(1) { animation-delay: 0.7s; }
+      .person:nth-child(2) { animation-delay: 0.8s; }
+      .person:nth-child(3) { animation-delay: 0.9s; }
+      .person:nth-child(4) { animation-delay: 1.0s; }
+      
+      .person:hover{
+        transform:translateY(-3px) scale(1.02);
+        background:rgba(255,255,255,0.03);
+        border-color:rgba(123,104,238,0.2);
+        box-shadow:0 8px 25px rgba(123,104,238,0.15);
       }
 
-      .user-name {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #add8e6;
-        margin-bottom: 0.2rem;
+      .person strong{
+        font-size:14px;
+        color:#dce9ff;
+        display:block;
+        margin-bottom:4px;
+        transition:color 0.3s ease;
       }
 
-      .review-date {
-        font-size: 0.9rem;
-        color: #b0c4de;
+      .person:hover strong{color:#ffffff}
+
+      .person .small{
+        font-size:12px;
+        color:var(--muted);
+        transition:color 0.3s ease;
       }
 
-      .review-text {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #b0c4de;
+      .person:hover .small{color:#b8c9e0}
+
+      .sidebar{
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+        position:sticky;
+        top:28px;
       }
 
-      .review-rating {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        gap: 0.2rem;
+      .sidecard{
+        padding:20px;
+        border-radius:16px;
+        background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+        border:1px solid rgba(255,255,255,0.03);
+        backdrop-filter:blur(6px);
+        animation:fadeInLeft 0.8s ease-out 0.4s both;
+        transition:transform 0.3s ease,box-shadow 0.3s ease;
+        position:relative;
+        overflow:hidden;
       }
 
-      .review-container .review-card * {
-        color: inherit !important;
+      .sidecard::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        border-radius:16px;
+        padding:2px;
+        background:linear-gradient(45deg, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff
+        );
+        background-size:400% 400%;
+        mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite:xor;
+        -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;
+        animation:gradientShift 4s ease-in-out infinite;
+        z-index:-1;
       }
-      .review-container .review-card .review-rating .fas.fa-star {
-        color: #ffd700 !important;
-        text-shadow: 0 0 4px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.5);
+      
+      .sidecard:hover{
+        transform:translateY(-2px);
+        box-shadow:0 20px 60px rgba(123,104,238,0.1);
       }
-      .review-container .review-card .review-rating .far.fa-star {
-        color: #000000 !important;
-        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-      }
-      .credits-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-        text-align: center;
-      }
-
-      .credits-header {
-        font-size: 3rem;
-        font-weight: 700;
-        background: linear-gradient(45deg, #7b68ee, #add8e6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 20px rgba(123, 104, 238, 0.4);
-        margin-bottom: 2rem;
-        animation: float 3s ease-in-out infinite;
-      }
-
-      .credits-section {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(123, 104, 238, 0.2);
-        border-radius: 20px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        transition: all 0.4s ease;
-      }
-
-      .credits-section:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0 30px rgba(123, 104, 238, 0.3);
-      }
-
-      .section-title {
-        font-size: 2rem;
-        font-weight: 600;
-        color: #add8e6;
-        margin-bottom: 1.5rem;
-        text-shadow: 0 0 10px rgba(173, 216, 230, 0.4);
-      }
-
-      .team-member {
-        font-size: 1.2rem;
-        color: #b0c4de;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
+      
+      .sidecard h4{margin:0 0 10px 0}
+      
+      .download-grid{display:grid;grid-template-columns:1fr;gap:10px}
+      
+      .download-item{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:16px 18px;
+        border-radius:12px;
+        background:rgba(255,255,255,0.01);
+        border:1px solid rgba(255,255,255,0.06);
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+        position:relative;
+        overflow:hidden;
+        opacity:0;
+        transform:translateY(20px);
+        animation:fadeInUp 0.6s ease-out forwards;
       }
 
-      .team-member:hover {
-        color: #7b68ee;
-        transform: translateX(10px);
+      .download-item:nth-child(1) { animation-delay: 0.5s; }
+      .download-item:nth-child(2) { animation-delay: 0.6s; }
+      .download-item:nth-child(3) { animation-delay: 0.7s; }
+      .download-item:nth-child(4) { animation-delay: 0.8s; }
+      
+      .download-item::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:-100%;
+        width:100%;
+        height:2px;
+        background:var(--accent1);
+        transition:left 0.4s ease;
+      }
+      
+      .download-item:hover{
+        transform:translateY(-3px) scale(1.02);
+        background:rgba(255,255,255,0.04);
+        border-color:rgba(123,104,238,0.2);
+        box-shadow:0 8px 25px rgba(123,104,238,0.15);
+      }
+      
+      .download-item:hover::before{left:0}
+      
+      .download-item strong{font-size:14px;transition:color 0.3s ease}
+      .download-item:hover strong{color:#ffffff}
+      .small{font-size:13px;color:var(--muted);transition:color 0.3s ease}
+      .download-item:hover .small{color:#b8c9e0}
+
+      .preview{
+        padding:20px;
+        border-radius:16px;
+        background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+        border:1px solid rgba(255,255,255,0.03);
+        backdrop-filter:blur(6px);
+        transition:transform 0.3s ease,box-shadow 0.3s ease;
+        position:relative;
+        overflow:hidden;
+        animation:fadeInLeft 0.8s ease-out 0.6s both;
       }
 
-      .team-member span {
-        color: #add8e6;
-        font-weight: 600;
+      .preview::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        border-radius:16px;
+        padding:2px;
+        background:linear-gradient(45deg, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff, 
+          #7b68ee, 
+          #6bd6ff, 
+          #ff6b9d, 
+          #c96fff
+        );
+        background-size:400% 400%;
+        mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite:xor;
+        -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;
+        animation:gradientShift 4s ease-in-out infinite;
+        z-index:-1;
+      }
+      
+      .preview:hover{
+        transform:translateY(-2px);
+        box-shadow:0 20px 60px rgba(123,104,238,0.1);
       }
 
-      footer {
-        text-align: center;
-        padding: 2rem;
-        border-top: 1px solid rgba(123, 104, 238, 0.2);
-        margin-top: 3rem;
-        font-size: 1rem;
-        color: #b0c4de;
-      }
-      .media-container {
-        max-width: 800px;
-        margin: 2rem auto;
-        text-align: center;
+      .preview h4{
+        margin:0 0 12px 0;
+        font-size:16px;
+        color:#eaf2ff;
       }
 
-      video.centered-media {
-        width: 90%;
-        max-width: 600px;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0 0 25px rgba(123, 104, 238, 0.4);
-        transition: transform 0.4s ease;
-        display: block;
-        margin: 0 auto;
+      .carousel{
+        position:relative;
+        overflow:hidden;
+        border-radius:12px;
+        background:#071226;
+        height:auto;
+        transition:height 0.4s cubic-bezier(0.4,0,0.2,1);
+      }
+      
+      .carousel-track{
+        display:flex;
+        height:100%;
+        transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+      }
+      
+      .carousel-slide{
+        min-width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100%;
+      }
+      
+      .carousel-slide img{
+        max-width:100%;
+        max-height:100%;
+        width:auto;
+        height:auto;
+        object-fit:contain;
+        transition:transform 0.3s ease;
+        border-radius:8px;
+        display:block;
+      }
+      
+      .carousel-slide img:hover{transform:scale(1.05)}
+      
+      .carousel-nav{
+        position:absolute;
+        top:50%;
+        transform:translateY(-50%);
+        width:44px;
+        height:44px;
+        border-radius:999px;
+        border:none;
+        background:rgba(0,0,0,0.7);
+        color:#ffffff;
+        display:grid;
+        place-items:center;
+        cursor:pointer;
+        backdrop-filter:blur(10px);
+        transition:all 0.3s ease;
+        font-size:18px;
+        z-index:10;
+        opacity:0;
+      }
+      
+      .carousel:hover .carousel-nav{
+        opacity:1;
+      }
+      
+      .carousel-nav:hover{
+        background:rgba(123,104,238,0.8);
+        transform:translateY(-50%) scale(1.1);
+      }
+      
+      .carousel-nav:focus{outline:2px solid rgba(123,104,238,0.35)}
+      .nav-left{left:12px}
+      .nav-right{right:12px}
+      
+      .indicators{
+        display:flex;
+        gap:8px;
+        justify-content:center;
+        padding:12px;
+      }
+      
+      .dot{
+        width:10px;
+        height:10px;
+        border-radius:999px;
+        background:rgba(255,255,255,0.07);
+        cursor:pointer;
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+      }
+      
+      .dot:hover{
+        background:rgba(123,104,238,0.6);
+        transform:scale(1.1);
+      }
+      
+      .dot.active{
+        background:var(--accent2);
+        box-shadow:0 6px 18px rgba(123,104,238,0.18);
+        transform:scale(1.2);
       }
 
-      img.centered-screenshot {
-        width: 90%;
-        max-width: 400px;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0 0 25px rgba(123, 104, 238, 0.4);
-        margin: 2rem auto;
-        display: block;
-        border: 2px solid rgba(123, 104, 238, 0.2);
+      .divider{
+        height:1px;
+        background:linear-gradient(90deg,transparent,rgba(123,104,238,0.12),transparent);
+        margin:28px 0;
+        border-radius:6px;
+        animation:fadeIn 0.8s ease-out 0.9s both;
       }
 
-      @media (max-width: 600px) {
-        video.centered-media,
-        img.centered-screenshot {
-          width: 95%;
-          max-width: 100%;
-        }
+      footer{
+        margin-top:44px;
+        padding:28px;
+        border-radius:12px;
+        background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        animation:fadeInUp 0.8s ease-out 1.1s both;
       }
-        .modal-overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(26,26,47,0.85);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 1;
-        pointer-events: auto;
-        transition: opacity 0.35s cubic-bezier(.22,1.12,.58,1);
-        }
-        @keyframes modalFadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-        }
-        .modal-content {
-        background: linear-gradient(135deg, #1c1c2e, #2a2a4a);
-        border-radius: 22px;
-        padding: 2rem 1.5rem 1.5rem 1.5rem;
-        box-shadow: 0 0 40px rgba(123,104,238,0.25);
-        border: 1.5px solid #7b68ee55;
-        width: 100%;
-        max-width: 350px;
-        min-width: 0;
-        box-sizing: border-box;
-        text-align: center;
-        position: relative;
-        animation: modalPopIn 0.5s cubic-bezier(.22,1.12,.58,1) both;
-        transform: scale(1) translateY(0);
-        opacity: 1;
-        transition: transform 0.35s cubic-bezier(.22,1.12,.58,1), opacity 0.35s cubic-bezier(.22,1.12,.58,1);
-        }
-        @keyframes modalPopIn {
-        0% { transform: scale(0.85) translateY(40px); opacity: 0; }
-        100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-        .modal-title {
-        color: #add8e6;
-        font-size: 2rem;
-        margin-bottom: 2rem;
-        font-weight: 700;
-        text-shadow: 0 0 12px rgba(123,104,238,0.25);
-        }
-        .modal-btn-group {
-        display: flex;
-        flex-direction: column;
-        gap: 1.1rem;
-        margin-bottom: 1.2rem;
-        }
-        .modal-btn {
-        font-size: 1.1rem;
-        font-weight: 600;
-        padding: 0.9rem 0;
-        border-radius: 12px;
-        border: none;
-        background: linear-gradient(90deg, #7b68ee, #add8e6);
-        color: #1c1c2e;
-        box-shadow: 0 0 12px rgba(123,104,238,0.12);
-        transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-        cursor: pointer;
-        text-decoration: none;
-        display: block;
-        width: 100%;
-        margin: 0 auto;
-        max-width: 90%;
-        }
-        .modal-btn.base {
-        background: linear-gradient(90deg, #add8e6, #7b68ee);
-        }
+      
+      footer p{margin:0;color:var(--muted)}
 
-        .modal-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(123,104,238,0.25);
-        opacity: 0.96;
-        }
+      .controls{display:flex;gap:10px}
 
-        .modal-title {
-        color: #add8e6;
-        font-size: 1.6rem;
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-        text-shadow: 0 0 12px rgba(123,104,238,0.25);
-        }
-
-        .modal-close {
-        position: absolute;
-        top: 1rem;
-        right: 1.2rem;
-        background: none;
-        border: none;
-        font-size: 2rem;
-        color: #add8e6;
-        cursor: pointer;
-        transition: color 0.2s;
-        z-index: 2;
-        }
-        .modal-overlay.hide {
-        opacity: 0;
-        pointer-events: none;
-        }
-        .modal-overlay.hide .modal-content {
-        transform: scale(0.85) translateY(40px);
-        opacity: 0;
-        }
-        .modal-close:hover {
-        color: #7b68ee;
-        }
-        @media (max-width: 480px) {
-        .modal-content {
-            padding: 1.2rem 0.5rem 1.2rem 0.5rem;
-            min-width: 0;
-        }
-        .modal-title {
-            font-size: 1.3rem;
-        }
-        }
-      @keyframes cosmicPulse {
-        0%,
-        100% {
-          transform: rotate(30deg) scale(1);
-          opacity: 0.4;
-        }
-        50% {
-          transform: rotate(30deg) scale(1.2);
-          opacity: 0.6;
-        }
+      .modal{
+        position:fixed;
+        inset:0;
+        display:grid;
+        place-items:center;
+        background:rgba(4,8,18,0.85);
+        backdrop-filter:blur(12px);
+        visibility:hidden;
+        opacity:0;
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+        z-index:1000;
+        padding:20px;
+      }
+      
+      .modal.show{visibility:visible;opacity:1}
+      
+      .modal-panel{
+        width:100%;
+        max-width:420px;
+        background:var(--card);
+        padding:24px;
+        border-radius:20px;
+        border:1px solid rgba(255,255,255,0.08);
+        backdrop-filter:blur(24px);
+        transform:scale(0.9) translateY(20px);
+        transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
+        box-shadow:0 25px 80px rgba(0,0,0,0.5);
+        max-height:90vh;
+        overflow-y:auto;
+        position:relative;
+      }
+      
+      .modal.show .modal-panel{transform:scale(1) translateY(0)}
+      
+      .modal-panel h3{margin:0 0 16px 0;font-size:20px}
+      
+      .modal-actions{
+        display:flex;
+        gap:10px;
+        margin-top:16px;
+        flex-wrap:wrap;
+      }
+      
+      .modal-close{
+        position:absolute;
+        top:16px;
+        right:20px;
+        background:rgba(255,255,255,0.05);
+        border:1px solid rgba(255,255,255,0.1);
+        color:var(--muted);
+        font-size:20px;
+        cursor:pointer;
+        padding:8px;
+        border-radius:8px;
+        transition:all 0.3s ease;
+        line-height:1;
+        width:36px;
+        height:36px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+      
+      .modal-close:hover{
+        color:#ffffff;
+        background:rgba(255,255,255,0.1);
+        border-color:rgba(255,255,255,0.2);
+        transform:scale(1.05);
       }
 
-      @keyframes floatImage {
-        0%,
-        100% {
-          transform: translateY(0);
+      .install-modal .modal-panel{
+        max-width:700px;
+        max-height:85vh;
+      }
+      
+      .install-tabs{
+        display:flex;
+        gap:8px;
+        margin-bottom:24px;
+        border-bottom:1px solid rgba(255,255,255,0.1);
+        overflow-x:auto;
+        scrollbar-width:none;
+        -ms-overflow-style:none;
+      }
+      
+      .install-tabs::-webkit-scrollbar{display:none}
+      
+      .tab-btn{
+        background:none;
+        border:none;
+        color:var(--muted);
+        padding:12px 18px;
+        border-radius:12px 12px 0 0;
+        cursor:pointer;
+        transition:all 0.3s ease;
+        position:relative;
+        font-weight:600;
+        white-space:nowrap;
+        font-size:14px;
+      }
+      
+      .tab-btn.active{
+        color:#ffffff;
+        background:rgba(123,104,238,0.15);
+      }
+      
+      .tab-btn.active::after{
+        content:'';
+        position:absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        height:3px;
+        background:var(--accent1);
+        border-radius:3px 3px 0 0;
+      }
+      
+      .tab-content{
+        display:none;
+        animation:fadeInUp 0.3s ease-out;
+      }
+      
+      .tab-content.active{display:block}
+      
+      .install-step{
+        padding:18px 20px;
+        margin:12px 0;
+        border-radius:12px;
+        background:rgba(255,255,255,0.025);
+        border-left:4px solid var(--accent2);
+        position:relative;
+        transition:all 0.3s ease;
+      }
+      
+      .install-step:hover{
+        background:rgba(255,255,255,0.04);
+        transform:translateX(3px);
+      }
+      
+      .install-step.warning{
+        background:var(--warning-bg);
+        border-left-color:var(--warning-border);
+        border:2px solid var(--warning-border);
+        border-left-width:4px;
+        box-shadow:0 0 20px rgba(255,193,7,0.1);
+      }
+      
+      .install-step.success{
+        background:var(--success-bg);
+        border-left-color:var(--success-border);
+        border:2px solid var(--success-border);
+        border-left-width:4px;
+        box-shadow:0 0 20px rgba(40,167,69,0.1);
+      }
+      
+      .install-step.info{
+        background:var(--info-bg);
+        border-left-color:var(--info-border);
+        border:2px solid var(--info-border);
+        border-left-width:4px;
+        box-shadow:0 0 20px rgba(23,162,184,0.1);
+      }
+      
+      .install-step.danger{
+        background:var(--danger-bg);
+        border-left-color:var(--danger-border);
+        border:2px solid var(--danger-border);
+        border-left-width:4px;
+        box-shadow:0 0 20px rgba(220,53,69,0.1);
+      }
+      
+      .install-step h4{
+        margin:0 0 12px 0;
+        color:#ffffff;
+        font-size:16px;
+        font-weight:700;
+        display:flex;
+        align-items:center;
+        gap:8px;
+      }
+      
+      .install-step p{
+        margin:0;
+        color:var(--muted);
+        line-height:1.6;
+        font-size:14px;
+      }
+      
+      .install-step .highlight{
+        background:rgba(123,104,238,0.2);
+        padding:2px 6px;
+        border-radius:6px;
+        color:#ffffff;
+        font-weight:600;
+      }
+      
+      .install-step ul{
+        margin:8px 0 0 0;
+        padding-left:20px;
+      }
+      
+      .install-step li{
+        margin:4px 0;
+        color:var(--muted);
+        line-height:1.5;
+      }
+      
+      .install-step code{
+        background:rgba(0,0,0,0.3);
+        padding:2px 6px;
+        border-radius:4px;
+        font-family:'Monaco','Menlo','Consolas',monospace;
+        color:#6bd6ff;
+        font-size:13px;
+      }
+      
+      .step-icon{
+        width:20px;
+        height:20px;
+        border-radius:50%;
+        background:var(--accent1);
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        color:#071028;
+        font-weight:700;
+        font-size:12px;
+        margin-right:8px;
+      }
+      
+      .warning .step-icon{background:var(--warning-border);color:#000}
+      .success .step-icon{background:var(--success-border);color:#000}
+      .info .step-icon{background:var(--info-border);color:#000}
+      .danger .step-icon{background:var(--danger-border);color:#000}
+
+      @keyframes fadeInDown{
+        from{opacity:0;transform:translateY(-20px)}
+        to{opacity:1;transform:translateY(0)}
+      }
+      
+      @keyframes fadeInUp{
+        from{opacity:0;transform:translateY(20px)}
+        to{opacity:1;transform:translateY(0)}
+      }
+      
+      @keyframes fadeInLeft{
+        from{opacity:0;transform:translateX(20px)}
+        to{opacity:1;transform:translateX(0)}
+      }
+      
+      @keyframes fadeInRight{
+        from{opacity:0;transform:translateX(-20px)}
+        to{opacity:1;transform:translateX(0)}
+      }
+      
+      @keyframes fadeIn{
+        from{opacity:0}
+        to{opacity:1}
+      }
+      
+      @keyframes float{
+        0%,100%{transform:translateY(0px)}
+        50%{transform:translateY(-10px)}
+      }
+      
+      @keyframes pulse{
+        0%,100%{transform:scale(1);opacity:1}
+        50%{transform:scale(1.05);opacity:0.9}
+      }
+
+      @keyframes gradientShift{
+        0%{background-position:0% 50%}
+        25%{background-position:100% 50%}
+        50%{background-position:100% 100%}
+        75%{background-position:0% 100%}
+        100%{background-position:0% 50%}
+      }
+
+      @media (max-width:1000px){
+        main{
+          grid-template-columns:1fr;
+          gap:24px;
         }
-        50% {
-          transform: translateY(-15px);
+        
+        .sidebar{
+          position:static;
+          flex-direction:row;
+          gap:20px;
+          overflow-x:auto;
+        }
+        
+        .sidebar .sidecard{
+          min-width:300px;
+          flex:0 0 auto;
+        }
+        
+        .sidebar .preview{
+          min-width:280px;
+          flex:0 0 auto;
+        }
+        
+        .cards{grid-template-columns:repeat(2,1fr)}
+        .credits-grid{grid-template-columns:repeat(2,1fr)}
+      }
+      
+      @media (max-width:768px){
+        .wrap{
+          margin:24px auto;
+          padding:20px;
+        }
+        
+        header{
+          flex-direction:column;
+          gap:16px;
+          align-items:stretch;
+          position: -webkit-sticky;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+          background: var(--bg);
+          padding-top: 12px;
+          padding-bottom: 16px;
+        }
+        
+        .brand{
+          justify-content:center;
+          text-align:center;
+        }
+        
+        .logo{
+          width:70px;
+          height:70px;
+        }
+        
+        .logo img{
+          width:60px;
+          height:60px;
+        }
+        
+        nav{
+          margin-left:0;
+          justify-content:center;
+          flex-wrap:wrap;
+        }
+        
+        main{gap:20px}
+        
+        .hero{
+          padding:20px;
+          border-radius:14px;
+        }
+
+        .credits-section{
+          padding:20px;
+          border-radius:14px;
+        }
+        
+        .headline{
+          font-size:24px;
+        }
+        
+        .lead{
+          font-size:15px;
+        }
+        
+        .sidebar{
+          flex-direction:column;
+          gap:16px;
+        }
+        
+        .sidebar .sidecard,
+        .sidebar .preview{
+          min-width:auto;
+        }
+        
+        .cards{
+          grid-template-columns:1fr;
+          gap:12px;
+        }
+        
+        .features{
+          grid-template-columns:1fr;
+          gap:10px;
+        }
+        
+        .credits-grid{
+          grid-template-columns:1fr;
+          gap:10px;
+        }
+        
+        .carousel-nav{
+          width:38px;
+          height:38px;
+          font-size:16px;
+        }
+        
+        .nav-left{left:8px}
+        .nav-right{right:8px}
+        
+        footer{
+          flex-direction:column;
+          gap:12px;
+          text-align:center;
+          padding:20px;
+        }
+      }
+      
+      @media (max-width:640px){
+        .wrap{padding:16px}
+        
+        .brand h1{font-size:18px}
+        .tag{font-size:12px}
+        .logo{width:60px;height:60px}
+        .logo img{width:50px;height:50px}
+        
+        .headline{font-size:20px}
+        .lead{font-size:14px}
+        
+        .btn{
+          padding:8px 12px;
+          font-size:13px;
+        }
+        
+        .hero{padding:16px}
+        .credits-section{padding:16px}
+        .sidecard{padding:16px}
+        .preview{padding:16px}
+        .card{padding:14px}
+        .feature{padding:10px}
+        .person{padding:12px}
+        
+        .modal{padding:12px}
+        .modal-panel{
+          padding:20px;
+          border-radius:16px;
+          max-height:85vh;
+        }
+        
+        .modal-close{
+          top:12px;
+          right:16px;
+          font-size:18px;
+          width:32px;
+          height:32px;
+        }
+        
+        .install-modal .modal-panel{
+          max-width:none;
+          width:100%;
+        }
+        
+        .install-tabs{
+          margin-bottom:20px;
+          padding-bottom:0;
+        }
+        
+        .tab-btn{
+          padding:10px 14px;
+          font-size:13px;
+          border-radius:8px;
+        }
+        
+        .install-step{
+          padding:14px 16px;
+          margin:10px 0;
+          border-radius:10px;
+        }
+        
+        .install-step h4{
+          font-size:15px;
+          margin-bottom:10px;
+        }
+        
+        .install-step p{font-size:13px}
+        
+        .carousel-nav{
+          width:32px;
+          height:32px;
+          font-size:14px;
+        }
+        
+        .nav-left{left:6px}
+        .nav-right{right:6px}
+      }
+      
+      @media (max-width:480px){
+        .wrap{padding:12px}
+        
+        .headline{font-size:18px}
+        .lead{font-size:13px}
+        
+        .hero{padding:14px}
+        .credits-section{padding:14px}
+        .sidecard{padding:14px}
+        .preview{padding:14px}
+        
+        nav{gap:8px}
+        
+        .btn{
+          padding:7px 10px;
+          font-size:12px;
+        }
+        
+        .logo{width:52px;height:52px}
+        .logo img{width:42px;height:42px}
+        
+        .modal-panel{padding:16px}
+        
+        .install-step{
+          padding:12px 14px;
+          border-radius:8px;
+        }
+        
+        .install-step h4{font-size:14px}
+        .install-step p{font-size:12px}
+        
+        .tab-btn{
+          padding:8px 12px;
+          font-size:12px;
+        }
+        
+        .modal-close{
+          top:10px;
+          right:14px;
+          font-size:16px;
+          width:28px;
+          height:28px;
         }
       }
 
-      @keyframes textGlow {
-        0%,
-        100% {
-          text-shadow: 0 0 20px rgba(123, 104, 238, 0.4);
-        }
-        50% {
-          text-shadow: 0 0 30px rgba(123, 104, 238, 0.6);
-        }
+      @media (prefers-reduced-motion:reduce){
+        *{animation:none !important;transition:none !important}
       }
 
-      @keyframes shineLine {
-        0% {
-          left: -150%;
-        }
-        100% {
-          left: 150%;
-        }
-      }
+      a,button{appearance:none;border:0}
+      .focus{box-shadow:0 0 0 4px rgba(123,104,238,0.12);border-radius:10px}
 
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-
-      @keyframes slideUp {
-        0% {
-          transform: translateY(20px);
-          opacity: 0;
-        }
-        100% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 2.5rem;
-        }
-        .pricing-card {
-          padding: 1.5rem;
-          max-width: 90%;
-        }
-        .btn {
-          padding: 0.8rem 1.5rem;
-          font-size: 1rem;
-        }
-        .card {
-          padding: 1.5rem;
-        }
-        video {
-          border-radius: 15px;
-        }
-      }
+      .modal.show{visibility:visible;opacity:1}
+      .modal.show .modal-panel{transform:scale(1) translateY(0)}
     </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <img
-          src="https://i.imgur.com/zGXOCSY.png"
-          alt="OneAI Logo"
-        />
-      </div>
-    </header>
-    <main class="container">
-      <h1 style="text-align: center">OneAI Features</h1>
-      <div class="content">
-        <div class="card">
-          <h2>Galaxy AI</h2>
-          <p>
-            Comes with all Galaxy AI preinstalled, significantly better than the
-            official version, and includes even some Chinese Galaxy AI features
-          </p>
-        </div>
-        <div class="card">
-          <h2>Optimization</h2>
-          <p>
-            Highly optimized, surpassing Samsung's efforts, with minimal RAM and
-            battery usage and enhanced performance.
-          </p>
-        </div>
-        <div class="card">
-          <h2>Highly Deknoxed</h2>
-          <p>
-            Removed all that useless knox stuff to have better performance, better heat and better system control without limitations.
-          </p>
-        </div>
-        <div class="card">
-          <h2>OneUI 8 Apps</h2>
-          <p>
-            Engineered to deliver a seamless experience with some OneUI 8 apps.</p>
-        </div>
-        <div class="card">
-          <h2>Patched to add/enhance useful features</h2>
-          <p>
-            Includes some patches to enable/enhance some features like '4 digit pin', 'App downgrade via apk', 'Advanced battery infos' and lots more.
-          </p>
-        </div>
-        <div class="card">
-          <h2>Easily Flashable</h2>
-          <p>
-            Odin-flashable rom, making installation much simpler, faster and safe for every user, even less experienced ones.</p>
-        </div>
-        <div class="card">
-          <h2>Enhanced Audio</h2>
-          <p>
-            Enabled more audio modes, disabled compression, and sounds ported from
-            ZFlip 7 for superior quality.
-          </p>
-        </div>
-        <div class="card">
-          <h2>Support my work (if you want)</h2>
-          <p>
-            If you like my work and want to help me developing more and more consider a donation.
-            <br /><br />
-            Link:
-            <a href="https://paypal.me/matteomeogrossi02?country.x=IT&locale.x=it_IT" target="_blank"
-              >Click Me!</a
-            >
-           </p>
-        </div>
-        <div class="card">
-          <h2>Active Community behind</h2>
-          <p>
-            Enter the Telegram group for stay in contact with other users and have news about future OneAI development.
-            <br /><br />
-            Link:
-            <a href="https://t.me/OneAI_community" target="_blank"
-              >Click Me!</a
-            >
-          </p>
-        </div>
-      </div>
-    </main>
-    <div class="draw-line"></div>
-    <h1 style="text-align: center">OneAI Previews</h1>
-    <div class="media-container">
-      <video class="centered-media" autoplay loop muted playsinline webkit-playsinline>
-        <source
-          src="https://cdn.glitch.global/1e6faa76-7ca0-4a7b-ade4-b55b7baff893/Screen_Recording_20250423_232832_One_UI_Home.mp4?v=1745440162774"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <div class="media-container">
-      <img 
-        class="centered-screenshot"
-        src="https://cdn.glitch.global/1e6faa76-7ca0-4a7b-ade4-b55b7baff893/Screenshot_20250525_012317_Settings.webp?v=1748179229509" 
-        alt="Screenshot"
-      />
-    </div>
-    <div class="draw-line"></div>
-    <section class="container">
-      <h1
-        style="
-          text-align: center;
-          color: #add8e6;
-          text-shadow: 0 0 15px rgba(173, 216, 230, 0.5);
-          margin: 2rem 0;
-        "
-      >
-        Installation Guide
-      </h1>
-      <div class="content">
-        <div class="card">
-          <h2>From Stock ROM or Other Custom Rom</h2>
-          <p>
-            1. Have unlocked bootloader.<br />
-            2. Flash the ROM with Odin (using in the CSC section
-            <strong>CSC file</strong>, not <em>HOME_CSC</em>).<br />
-            3. Boot into TWRP and <strong>Format Data</strong>.<br />
-            4. Reboot and enjoy OneAI!
-          </p>
-        </div>
-        <div class="card">
-          <h2>From Older OneAI Releases</h2>
-          <p>
-            1. Flash the ROM with Odin using <strong>HOMECSC file</strong>.<br />
-            2. Reboot your device and enjoy.<br />
-            3. If any issues occur, boot into TWRP and
-            <strong>Format Data</strong>.<br />
-            4. Reboot and enjoy OneAI!
-          </p>
-        </div>
-      </div>
-    </section>
-    <section id="downloads" class="container">
-      <div class="draw-line"></div>
-        <h1
-           style="
-              text-align: center;
-              color: #6bd6ff;
-              text-shadow: 0 0 15px rgba(107, 214, 255, 0.5);
-           "
-        >     
-           Download Link Here
-        </h1>
-    </section>
-    <div class="container" style="position: relative; overflow: hidden">
-      <div class="pricing" style="display: flex; justify-content: center">
-        <div
-          class="pricing-card"
-          style="
-            background: linear-gradient(45deg, #0a0a1a, #2a2356);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid #6bd6ff55;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(107, 214, 255, 0.2);
-            transform: rotateX(0deg);
-            transition: all 0.3s;
-            cursor: pointer;
-          "
-          onmouseover="this.style.transform = 'rotateX(10deg) scale(1.05)'; this.style.boxShadow = '0 0 50px rgba(107,214,255,0.4)'"
-          onmouseout="this.style.transform = 'rotateX(0deg) scale(1)'; this.style.boxShadow = '0 0 30px rgba(107,214,255,0.2)'"
-        >
-          <h2
-            style="
-              color: #9d7cff;
-              margin-bottom: 1rem;
-              text-align: center;
-              font-size: 2rem;
-            "
-          >
-            S21
-          </h2>
-
-          <!-- Base S21 -->
-          <div style="margin-bottom: 2rem; text-align: center">
-            <button
-              class="btn"
-              style="
-                background: linear-gradient(45deg, #9d7cff, #6bd6ff);
-                color: #0a0a1a;
-                border: none;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: all 0.3s;
-                position: relative;
-                overflow: hidden;
-              "
-              onmouseover="this.style.transform = 'scale(1.1) rotate(2deg)'; this.style.boxShadow = '0 0 20px rgba(157,124,255,0.5)'"
-              onmouseout="this.style.transform = 'scale(1)'; this.style.boxShadow = 'none'"
-              onclick="window.location.href='https://drive.google.com/file/d/1Vkm9E1FuSlBLzDD8pAsE7DEcOKCqmFK1/view?usp=drivesdk'"
-            >
-              Click Me!
-            </button>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="logo" aria-hidden>
+            <img src="https://i.imgur.com/g4PKkiO.png" alt="OneAI Logo" />
+          </div>
+          <div>
+            <h1>OneAI Rom</h1>
+            <div class="tag">Optimized • Odin-friendly • One UI ports</div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="container" style="position: relative; overflow: hidden">
-      <div class="pricing" style="display: flex; justify-content: center">
-        <div
-          class="pricing-card"
-          style="
-            background: linear-gradient(45deg, #0a0a1a, #2a2356);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid #6bd6ff55;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(107, 214, 255, 0.2);
-            transform: rotateX(0deg);
-            transition: all 0.3s;
-            cursor: pointer;
-          "
-          onmouseover="this.style.transform = 'rotateX(10deg) scale(1.05)'; this.style.boxShadow = '0 0 50px rgba(107,214,255,0.4)'"
-          onmouseout="this.style.transform = 'rotateX(0deg) scale(1)'; this.style.boxShadow = '0 0 30px rgba(107,214,255,0.2)'"
-        >
-          <h2
-            style="
-              color: #9d7cff;
-              margin-bottom: 1rem;
-              text-align: center;
-              font-size: 2rem;
-            "
-          >
-            S21+
-          </h2>
 
-          <!-- Base S21+ -->
-          <div style="margin-bottom: 2rem; text-align: center">
-            <button
-              class="btn"
-              style="
-                background: linear-gradient(45deg, #9d7cff, #6bd6ff);
-                color: #0a0a1a;
-                border: none;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: all 0.3s;
-                position: relative;
-                overflow: hidden;
-              "
-              onmouseover="this.style.transform = 'scale(1.1) rotate(2deg)'; this.style.boxShadow = '0 0 20px rgba(157,124,255,0.5)'"
-              onmouseout="this.style.transform = 'scale(1)'; this.style.boxShadow = 'none'"
-              onclick="window.location.href='https://drive.google.com/file/d/1k7Sfa39dyX5UTK2VDiMx_jHdod0YlTaZ/view?usp=drivesdk'"
-            >
-              Click Me!
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container" style="position: relative; overflow: hidden">
-      <div class="pricing" style="display: flex; justify-content: center">
-        <div
-          class="pricing-card"
-          style="
-            background: linear-gradient(45deg, #0a0a1a, #2a2356);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid #6bd6ff55;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(107, 214, 255, 0.2);
-            transform: rotateX(0deg);
-            transition: all 0.3s;
-            cursor: pointer;
-          "
-          onmouseover="this.style.transform = 'rotateX(10deg) scale(1.05)'; this.style.boxShadow = '0 0 50px rgba(107,214,255,0.4)'"
-          onmouseout="this.style.transform = 'rotateX(0deg) scale(1)'; this.style.boxShadow = '0 0 30px rgba(107,214,255,0.2)'"
-        >
-          <h2
-            style="
-              color: #9d7cff;
-              margin-bottom: 1rem;
-              text-align: center;
-              font-size: 2rem;
-            "
-          >
-            S21U G998B/N
-          </h2>
+        <nav>
+          <a class="btn" href="https://t.me/OneAI_community" target="_blank">Telegram</a>
+          <a class="btn" href="https://paypal.me/matteomeogrossi02" target="_blank">Donate</a>
+          <button class="btn" id="installGuide">Install Guide</button>
+        </nav>
+      </header>
 
-          <!-- S21U G998B -->
-            <div style="margin-bottom: 2rem; text-align: center">
-            <button
-                class="btn"
-                id="showDownloadModal"
-                style="
-                background: linear-gradient(45deg, #9d7cff, #6bd6ff);
-                color: #0a0a1a;
-                border: none;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: all 0.3s;
-                position: relative;
-                overflow: hidden;
-                "
-                onmouseover="this.style.transform = 'scale(1.1) rotate(2deg)'; this.style.boxShadow = '0 0 20px rgba(157,124,255,0.5)'"
-                onmouseout="this.style.transform = 'scale(1)'; this.style.boxShadow = 'none'"
-                type="button"
-            >
-                Click Me!
-            </button>
+      <main>
+        <div class="main-content">
+          <section class="hero" id="features">
+            <div class="eyebrow">Stable Build</div>
+            <h2 class="headline">Faster. Cleaner. More in control.</h2>
+            <p class="lead">OneAI is a carefully curated One UI port with performance tweaks, added features and minimal compromises. Flash with Odin. Easy to follow guide and active community support.</p>
+
+            <div class="features">
+              <div class="feature">
+                <h3>Galaxy AI</h3>
+                <p>Comes with all Galaxy AI preinstalled, significantly better than the official version, and includes even some Chinese Galaxy AI features.</p>
+              </div>
+              <div class="feature">
+                <h3>Properly Optimized</h3>
+                <p>Highly optimized, surpassing Samsung's efforts, with minimal RAM and battery usage and enhanced performance..</p>
+              </div>
+              <div class="feature">
+                <h3>Highly Deknoxed</h3>
+                <p>Removed all that useless knox stuff to have better performance, better heat and better system control without limitations..</p>
+              </div>
+              <div class="feature">
+                <h3>Audio & UX</h3>
+                <p>Enabled more audio modes, disabled compression, and sounds ported from ZFlip 7 for superior quality.</p>
+              </div>
             </div>
+
+            <div class="cards">
+              <div class="card">
+                <h3>Patch-set</h3>
+                <p>Built-in patches for 4-digit PIN, app downgrades and enhanced battery info.</p>
+              </div>
+              <div class="card">
+                <h3>Flash-friendly</h3>
+                <p>Odin with clear instructions so flashing is painless.</p>
+              </div>
+              <div class="card">
+                <h3>Active Community</h3>
+                <p>Join Telegram for discussion, help and further updates.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="credits-section">
+            <h3>Credits</h3>
+            <p>Meet the team behind OneAI</p>
+            <div class="credits-grid">
+              <div class="person"><strong>MatteoMeo</strong><div class="small">Main developer — ROM, optimizations, fixes</div></div>
+              <div class="person"><strong>Fwp</strong><div class="small">Testing and kernel work</div></div>
+              <div class="person"><strong>Devcore</strong><div class="small">Ports and major contributions</div></div>
+              <div class="person"><strong>Kusoi</strong><div class="small">Website & deployment</div></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="sidebar">
+          <aside class="sidecard" id="download">
+            <h4>Downloads</h4>
+            <div class="download-grid">
+              <div class="download-item"><strong>S21 (G991B)</strong><span class="small"><a href="https://drive.google.com/file/d/1Vkm9E1FuSlBLzDD8pAsE7DEcOKCqmFK1/view?usp=drivesdk" class="btn">Direct</a></span></div>
+              <div class="download-item"><strong>S21+ (G996B)</strong><span class="small"><a href="https://drive.google.com/file/d/1k7Sfa39dyX5UTK2VDiMx_jHdod0YlTaZ/view?usp=drivesdk" class="btn">Direct</a></span></div>
+              <div class="download-item"><strong>S21U (G998B/N)</strong><span class="small"><button class="btn" id="openModal2">Choose</button></span></div>
+              <div class="download-item"><strong>S21 FE (G990E)</strong><span class="small"><a href="https://drive.google.com/file/d/1FFyO1MH6oosdUG4XGWGOfsMzAhsDr1wL/view?usp=drivesdk" class="btn">Direct</a></span></div>
+            </div>
+          </aside>
+
+          <aside class="preview" aria-labelledby="preview-heading">
+            <h4 id="preview-heading">Preview</h4>
+            <div class="carousel" id="carousel">
+              <div class="carousel-track" id="carouselTrack">
+              </div>
+              
+              <button class="carousel-nav nav-left" id="prevBtn">‹</button>
+              <button class="carousel-nav nav-right" id="nextBtn">›</button>
+              
+              <div class="indicators" id="indicators">
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <footer>
+        <p>© 2025 OneAI, By Kusoi — All rights reserved</p>
+        <div class="controls"><a class="btn" href="#features">Back to top</a></div>
+      </footer>
+    </div>
+
+    <div class="modal" id="modal">
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" id="close">×</button>
+        <h3 id="modal-title">Choose S21U build</h3>
+        <p class="small">Pick the file for your model. These open in a new tab.</p>
+        <div class="modal-actions">
+          <a class="btn" href="https://drive.google.com/file/d/1Jbw_63kOmNqLiHhXOda_iDDoWOtJIfB2/view?usp=drivesdk" target="_blank">G998B</a>
+          <a class="btn" href="https://drive.google.com/file/d/13vdsbd3k3UrL-JQD689KzE_RzfkpEHpI/view?usp=drivesdk" target="_blank">G998N</a>
         </div>
       </div>
     </div>
-    <div class="container" style="position: relative; overflow: hidden">
-      <div class="pricing" style="display: flex; justify-content: center">
-        <div
-          class="pricing-card"
-          style="
-            background: linear-gradient(45deg, #0a0a1a, #2a2356);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid #6bd6ff55;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(107, 214, 255, 0.2);
-            transform: rotateX(0deg);
-            transition: all 0.3s;
-            cursor: pointer;
-          "
-          onmouseover="this.style.transform = 'rotateX(10deg) scale(1.05)'; this.style.boxShadow = '0 0 50px rgba(107,214,255,0.4)'"
-          onmouseout="this.style.transform = 'rotateX(0deg) scale(1)'; this.style.boxShadow = '0 0 30px rgba(107,214,255,0.2)'"
-        >
-          <h2
-            style="
-              color: #9d7cff;
-              margin-bottom: 1rem;
-              text-align: center;
-              font-size: 2rem;
-            "
-          >
-            S21FE G990E
-          </h2>
 
-          <!-- S21FE -->
-          <div style="margin-bottom: 2rem; text-align: center">
-            <button
-              class="btn"
-              style="
-                background: linear-gradient(45deg, #9d7cff, #6bd6ff);
-                color: #0a0a1a;
-                border: none;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: all 0.3s;
-                position: relative;
-                overflow: hidden;
-              "
-              onmouseover="this.style.transform = 'scale(1.1) rotate(2deg)'; this.style.boxShadow = '0 0 20px rgba(157,124,255,0.5)'"
-              onmouseout="this.style.transform = 'scale(1)'; this.style.boxShadow = 'none'"
-              onclick="window.location.href='https://drive.google.com/file/d/1FFyO1MH6oosdUG4XGWGOfsMzAhsDr1wL/view?usp=drivesdk'"
-            >
-              Click Me!
-            </button>
+    <div class="modal install-modal" id="installModal">
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
+        <button class="modal-close" id="closeInstall">×</button>
+        <h3 id="install-modal-title">Installation Guide</h3>
+        <p class="small">Choose your installation method below. Follow each step carefully.</p>
+        
+        <div class="install-tabs">
+          <button class="tab-btn active" data-tab="stock">From Stock ROM</button>
+          <button class="tab-btn" data-tab="custom">From Custom ROM</button>
+          <button class="tab-btn" data-tab="older">From Older OneAI</button>
+        </div>
+        
+        <div class="tab-content active" id="stock">
+          <div class="install-step danger">
+            <h4><span class="step-icon">⚠</span>Critical Warning</h4>
+            <p><strong>BACKUP YOUR DATA FIRST!</strong> This process will completely wipe your device. Make sure you have:</p>
+            <ul>
+              <li>Full device backup (photos, contacts, apps)</li>
+              <li>Your Google/Samsung account ready for restore</li>
+              <li>Important files saved to cloud or PC</li>
+            </ul>
+          </div>
+          
+          <div class="install-step info">
+            <h4><span class="step-icon">1</span>Prerequisites & Downloads</h4>
+            <p>Before starting, ensure you have these tools ready:</p>
+            <ul>
+              <li><span class="highlight">Unlocked bootloader</span> on your device</li>
+              <li><strong>Samsung Odin</strong> (latest version from developer)</li>
+              <li><strong>Samsung USB drivers</strong> installed on PC</li>
+              <li><strong>OneAI ROM</strong> for your exact device model</li>
+              <li>Quality USB-C cable (avoid cheap cables)</li>
+            </ul>
+          </div>
+          
+          <div class="install-step">
+            <h4><span class="step-icon">2</span>Prepare Your Device</h4>
+            <p>Set up your device for flashing:</p>
+            <ul>
+              <li>Go to <code>Settings → Developer Options</code></li>
+              <li>Enable <span class="highlight">USB Debugging</span></li>
+              <li>Enable <span class="highlight">OEM Unlocking</span></li>
+              <li>Power off your device completely</li>
+              <li>Boot into <strong>Download Mode</strong>: Hold <code>Volume Down + Volume Up + Power</code> while connecting USB cable</li>
+            </ul>
+          </div>
+          
+          <div class="install-step warning">
+            <h4><span class="step-icon">3</span>Flash with Odin</h4>
+            <p><strong>IMPORTANT:</strong> Use CSC file, NOT HOME_CSC for clean installation!</p>
+            <ul>
+              <li>Open Odin as Administrator on your PC</li>
+              <li>Connect device (should show blue "Added" message)</li>
+              <li>Load OneAI files in correct slots:</li>
+              <ul>
+                <li><strong>AP:</strong> OneAI_AP_*.tar.md5</li>
+                <li><strong>BL:</strong> OneAI_BL_*.tar.md5</li>
+                <li><strong>CP:</strong> OneAI_CP_*.tar.md5</li>
+                <li><strong>CSC:</strong> OneAI_CSC_*.tar.md5 (NOT HOME_CSC!)</li>
+              </ul>
+              <li>Click <span class="highlight">Start</span> and wait (10-15 minutes)</li>
+              <li>Device will reboot automatically when done</li>
+            </ul>
+          </div>
+          
+          <div class="install-step success">
+            <h4><span class="step-icon">4</span>Format Data & First Boot</h4>
+            <p>Complete the installation:</p>
+            <ul>
+              <li>Device should boot to TWRP recovery automatically</li>
+              <li>Go to <strong>Wipe → Format Data</strong></li>
+              <li>Type <code>yes</code> to confirm data wipe</li>
+              <li>Select <strong>Reboot System</strong></li>
+              <li><strong>First boot takes 10-15 minutes</strong> - be patient!</li>
+              <li>Complete Android setup and enjoy OneAI!</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="custom">
+          <div class="install-step warning">
+            <h4><span class="step-icon">⚠</span>Coming from Custom ROM</h4>
+            <p>Installing over other custom ROMs requires extra care. <strong>Clean installation is highly recommended</strong> to avoid conflicts and bootloops.</p>
+          </div>
+          
+          <div class="install-step danger">
+            <h4><span class="step-icon">1</span>Complete Wipe Required</h4>
+            <p>Unlike stock ROM, coming from custom ROM needs full cleanup:</p>
+            <ul>
+              <li>Boot into <strong>TWRP recovery</strong></li>
+              <li>Go to <strong>Wipe → Advanced Wipe</strong></li>
+              <li>Select: <code>System</code>, <code>Data</code>, <code>Cache</code>, <code>Dalvik/ART Cache</code></li>
+              <li>Swipe to wipe selected partitions</li>
+              <li>Go to <strong>Wipe → Format Data</strong></li>
+              <li>Type <code>yes</code> to confirm complete data format</li>
+            </ul>
+          </div>
+          
+          <div class="install-step">
+            <h4><span class="step-icon">2</span>Flash OneAI ROM</h4>
+            <p>Now flash the ROM with Odin:</p>
+            <ul>
+              <li>Reboot to <strong>Download Mode</strong></li>
+              <li>Connect to PC and open Odin</li>
+              <li>Load OneAI ROM files in appropriate slots</li>
+              <li><strong>Use CSC file (NOT HOME_CSC)</strong> for clean install</li>
+              <li>Click Start and wait for completion</li>
+            </ul>
+          </div>
+          
+          <div class="install-step success">
+            <h4><span class="step-icon">3</span>Final Steps</h4>
+            <p>Complete the installation:</p>
+            <ul>
+              <li>Device should boot to TWRP automatically</li>
+              <li>If you see any errors, <strong>Format Data</strong> again</li>
+              <li>Reboot System</li>
+              <li>First boot will take 10-15 minutes</li>
+              <li>If stuck on boot screen, boot back to TWRP and format data once more</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="older">
+          <div class="install-step success">
+            <h4><span class="step-icon">✓</span>Easy Update Process</h4>
+            <p>Updating from older OneAI versions is much simpler! Your data and settings can be preserved in most cases.</p>
+          </div>
+          
+          <div class="install-step">
+            <h4><span class="step-icon">1</span>Download Latest ROM</h4>
+            <p>Get the newest OneAI version:</p>
+            <ul>
+              <li>Download the latest OneAI ROM for your device</li>
+              <li>Ensure it's the correct model (G991B, G996B, etc.)</li>
+              <li>Have Odin ready on your PC</li>
+            </ul>
+          </div>
+          
+          <div class="install-step info">
+            <h4><span class="step-icon">2</span>Flash Update</h4>
+            <p><strong>Key difference:</strong> Use HOME_CSC this time to preserve data!</p>
+            <ul>
+              <li>Boot into <strong>Download Mode</strong></li>
+              <li>Connect to PC and open Odin</li>
+              <li>Load ROM files in slots</li>
+              <li><strong>Use HOME_CSC file</strong> (not regular CSC)</li>
+              <li>This preserves your apps and data</li>
+              <li>Click Start and wait for completion</li>
+            </ul>
+          </div>
+          
+          <div class="install-step success">
+            <h4><span class="step-icon">3</span>Reboot and Enjoy</h4>
+            <p>Simple finish:</p>
+            <ul>
+              <li>Device will reboot automatically</li>
+              <li>Your apps and settings should be intact</li>
+              <li>OneAI will show new version in Settings</li>
+              <li>No setup required - you're done!</li>
+            </ul>
+          </div>
+          
+          <div class="install-step warning">
+            <h4><span class="step-icon">🔧</span>Troubleshooting</h4>
+            <p>If you experience issues after updating:</p>
+            <ul>
+              <li><strong>Bootloop or won't start:</strong></li>
+              <ul>
+                <li>Boot into TWRP recovery</li>
+                <li>Go to <strong>Wipe → Format Data</strong></li>
+                <li>Type <code>yes</code> to confirm</li>
+                <li>Reboot system</li>
+              </ul>
+              <li><strong>Apps crashing:</strong> Clear cache in Settings → Storage</li>
+              <li><strong>Performance issues:</strong> Restart device and wait 24h for optimization</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="draw-line"></div>
-    <h1
-      style="
-        text-align: center;
-        color: #6bd6ff;
-        text-shadow: 0 0 15px rgba(107, 214, 255, 0.5);
-      "
-    >
-      Rom Fixes Here
-    </h1>
-    <div class="container" style="position: relative; overflow: hidden">
-      <div class="pricing" style="display: flex; justify-content: center">
-        <div
-          class="pricing-card"
-          style="
-            background: linear-gradient(45deg, #0a0a1a, #2a2356);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid #6bd6ff55;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(107, 214, 255, 0.2);
-            transform: rotateX(0deg);
-            transition: all 0.3s;
-            cursor: pointer;
-          "
-          onmouseover="this.style.transform = 'rotateX(10deg) scale(1.05)'; this.style.boxShadow = '0 0 50px rgba(107,214,255,0.4)'"
-          onmouseout="this.style.transform = 'rotateX(0deg) scale(1)'; this.style.boxShadow = '0 0 30px rgba(107,214,255,0.2)'"
-        >
-          <h2
-            style="
-              color: #9d7cff;
-              margin-bottom: 1rem;
-              text-align: center;
-              font-size: 2rem;
-            "
-          >
-            No Fix Needs
-          </h2>
 
-          <div style="margin-bottom: 2rem; text-align: center">
-            <button
-              class="btn"
-              style="
-                background: linear-gradient(45deg, #9d7cff, #6bd6ff);
-                color: #0a0a1a;
-                border: none;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: all 0.3s;
-                position: relative;
-                overflow: hidden;
-              "
-              onmouseover="this.style.transform = 'scale(1.1) rotate(2deg)'; this.style.boxShadow = '0 0 20px rgba(157,124,255,0.5)'"
-              onmouseout="this.style.transform = 'scale(1)'; this.style.boxShadow = 'none'"
-              onclick="window.location.href='nolink'"
-            >
-              Click Me!
-            </button>
-          </div>
-        </div>
-      </div>
-    <div class="container" style="position: relative; overflow: hidden">
-      <div class="pricing" style="display: flex; justify-content: center">
-        <div
-          class="pricing-card"
-          style="
-            background: linear-gradient(45deg, #0a0a1a, #2a2356);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid #6bd6ff55;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(107, 214, 255, 0.2);
-            transform: rotateX(0deg);
-            transition: all 0.3s;
-            cursor: pointer;
-          "
-          onmouseover="this.style.transform = 'rotateX(10deg) scale(1.05)'; this.style.boxShadow = '0 0 50px rgba(107,214,255,0.4)'"
-          onmouseout="this.style.transform = 'rotateX(0deg) scale(1)'; this.style.boxShadow = '0 0 30px rgba(107,214,255,0.2)'"
-        >
-          <h2
-            style="
-              color: #9d7cff;
-              margin-bottom: 1rem;
-              text-align: center;
-              font-size: 2rem;
-            "
-          >
-            No Fix Needed
-          </h2>
+<script>
+function showModal(modal) {
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
 
-          <div style="margin-bottom: 2rem; text-align: center">
-            <button
-              class="btn"
-              style="
-                background: linear-gradient(45deg, #9d7cff, #6bd6ff);
-                color: #0a0a1a;
-                border: none;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: all 0.3s;
-                position: relative;
-                overflow: hidden;
-              "
-              onmouseover="this.style.transform = 'scale(1.1) rotate(2deg)'; this.style.boxShadow = '0 0 20px rgba(157,124,255,0.5)'"
-              onmouseout="this.style.transform = 'scale(1)'; this.style.boxShadow = 'none'"
-              onclick="window.location.href='nolink'"
-            >
-              Click Me!
-            </button>
-          </div>
-        </div>
-      </div>
-      <section class="container">
-        <div class="content">
-          <div class="card">
-            <h2>Tutorial On How To Flash OneAI Rom Fixes:</h2>
-            <p>
-              1. Download The Rom Fix.<br />
-              2. Boot To TWRP.<br />
-              3. Go To Install And Flash The Rom Fix.<br />
-              4. Reboot and enjoy!
-              <br/>
-              Note: This fixes are supposed to fix some bugs, stability and performance issues in order to make the rom smoother and faster.
-            </p>
-          </div>
-      </div>
-        <div class="draw-line"></div>
-        <div class="credits-container">
-          <h1 class="credits-header">OneAI Credits</h1>
-          <div class="credits-section">
-            <h2 class="section-title">Main Developer</h2>
-            <div class="team-member">
-              <span>MatteoMeo</span> - Making the rom work, optimizing, and bug
-              fixing.
-            </div>
-          </div>
-          <div class="credits-section">
-            <h2 class="section-title">Developer</h2>
-            <div class="team-member">
-              <span>Fwp</span> - Testing and kernel compilation.
-            </div>
-          </div>
-          <div class="credits-section">
-            <h2 class="section-title">Contributors</h2>
-            <div class="team-member">
-              <span>Devcore</span> - Huge helper with ports and other things.
-            </div>
-          </div>
-          <div class="credits-section">
-            <h2 class="section-title">Website</h2>
-            <div class="team-member">
-              <span>Kusoi</span> - Setting everything up.<br />
-              <span>Ilyax</span> - Website based on Ilyax's code. <br />
-              <span>MagicalMe</span> - Added smoother animations, cleaner interface
-              and the review system. <br />
-            </div>
-          </div>
-          <div class="credits-section">
-            <h2 class="section-title">Testers</h2>
-            <div class="team-member">
-              <span>Kusoi</span><br />
-              <span>Tom</span>
-            </div>
-          </div>
-        </div>
-        <script
-          src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-          crossorigin="anonymous"
-        ></script>
-        <footer>
-          <p>© 2025 OneAI, All Rights Reserved.</p>
-        </footer>
-        <div id="downloadModal" class="modal-overlay" style="display:none;">
-      <div class="modal-content">
-        <h2 class="modal-title">Choose your model</h2>
-        <div class="modal-btn-group">
-          <a href="https://drive.google.com/file/d/1Jbw_63kOmNqLiHhXOda_iDDoWOtJIfB2/view?usp=drivesdk" class="btn modal-btn" target="_blank">S21U G998B</a>
-          <a href="https://drive.google.com/file/d/13vdsbd3k3UrL-JQD689KzE_RzfkpEHpI/view?usp=drivesdk" class="btn modal-btn base" target="_blank">S21U G998N</a>
-        </div>
-        <button class="modal-close" id="closeModalBtn" aria-label="Close">&times;</button>
-      </div>
-    </div>
-    <script>
-        const showModalBtn = document.getElementById('showDownloadModal');
-        const modal = document.getElementById('downloadModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
+function hideModal(modal) {
+  if (modal) {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
 
-        function openModal() {
-        modal.style.display = 'flex';
-        setTimeout(() => modal.classList.remove('hide'), 10);
-        document.body.style.overflow = 'hidden';
+(function(){
+  const carouselImages = [
+    { src: 'https://i.imgur.com/g0J8vV3.jpeg', alt: 'OneAI Screenshot 1' },
+    { src: 'https://i.imgur.com/xymeNw6.jpeg', alt: 'OneAI Settings Screenshot' },
+    { src: 'https://i.imgur.com/utXiMyt.jpeg', alt: 'OneAI Screenshot 3' },
+    { src: 'https://i.imgur.com/1XXnpdk.jpeg', alt: 'OneAI Screenshot 4' },
+    { src: 'https://i.imgur.com/ungWGYR.jpeg', alt: 'OneAI Screenshot 5' },
+    { src: 'https://i.imgur.com/McEPGiA.jpeg', alt: 'OneAI Screenshot 6' },
+  ];
+
+  const modal = document.getElementById('modal');
+  const installModal = document.getElementById('installModal');
+  const open = document.getElementById('openModal');
+  const open2 = document.getElementById('openModal2');
+  const close = document.getElementById('close');
+  const closeDownload = document.getElementById('closeDownload');
+  const installGuide = document.getElementById('installGuide');
+  const closeInstall = document.getElementById('closeInstall');
+
+  const carousel = document.getElementById('carousel');
+  const carouselTrack = document.getElementById('carouselTrack');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const indicatorsContainer = document.getElementById('indicators');
+
+  let currentSlide = 0;
+  let totalSlides = carouselImages.length;
+  let indicators = [];
+  let autoSlideInterval;
+  let imageLoadPromises = [];
+  let isInitialized = false;
+
+  function initializeCarousel() {
+    carouselTrack.innerHTML = '';
+    indicatorsContainer.innerHTML = '';
+    indicators = [];
+    imageLoadPromises = [];
+
+    carouselImages.forEach((imageData, index) => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+
+      const img = document.createElement('img');
+      img.alt = imageData.alt || '';
+      img.loading = 'lazy';
+
+      const loadPromise = new Promise((resolve, reject) => {
+        const tempImg = new Image();
+        tempImg.onload = () => {
+          img.src = tempImg.src;
+          resolve({ index, img, naturalWidth: tempImg.naturalWidth, naturalHeight: tempImg.naturalHeight });
+        };
+        tempImg.onerror = () => {
+          img.src = 'https://via.placeholder.com/800x450?text=Preview+unavailable';
+          resolve({ index, img, naturalWidth: 800, naturalHeight: 450 });
+        };
+        tempImg.src = imageData.src;
+      });
+
+      imageLoadPromises.push(loadPromise);
+
+      slide.appendChild(img);
+      carouselTrack.appendChild(slide);
+
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      if (index === 0) dot.classList.add('active');
+      dot.dataset.slide = index;
+      dot.addEventListener('click', () => goToSlide(index));
+
+      indicatorsContainer.appendChild(dot);
+      indicators.push(dot);
+    });
+
+    totalSlides = carouselImages.length;
+
+    if (totalSlides <= 1) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      indicatorsContainer.style.display = 'none';
+    } else {
+      if (prevBtn) prevBtn.style.display = 'grid';
+      if (nextBtn) nextBtn.style.display = 'grid';
+      indicatorsContainer.style.display = 'flex';
+    }
+
+    if (imageLoadPromises[0]) {
+      imageLoadPromises[0].then(() => {
+        adjustCarouselHeight();
+        isInitialized = true;
+      });
+    }
+  }
+
+  function adjustCarouselHeight() {
+    if (!carousel || totalSlides === 0 || !isInitialized) return;
+
+    const currentSlideElement = carouselTrack.children[currentSlide];
+    if (!currentSlideElement) return;
+
+    const currentImg = currentSlideElement.querySelector('img');
+    if (!currentImg) return;
+
+    setTimeout(() => {
+      let naturalWidth = currentImg.naturalWidth;
+      let naturalHeight = currentImg.naturalHeight;
+
+      if (!naturalWidth || !naturalHeight) {
+        const loadedImage = imageLoadPromises[currentSlide];
+        if (loadedImage && loadedImage._resolved) {
+          naturalWidth = loadedImage._resolved.naturalWidth;
+          naturalHeight = loadedImage._resolved.naturalHeight;
         }
-        function closeModal() {
-        modal.classList.add('hide');
-        document.body.style.overflow = '';
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 350);
-        }
-        showModalBtn.addEventListener('click', openModal);
-        closeModalBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape" && modal.style.display === 'flex') closeModal();
-        });
-        </script>
+      }
+
+      if (!naturalWidth || !naturalHeight) {
+        naturalWidth = 800;
+        naturalHeight = 450;
+      }
+
+      const containerWidth = carousel.clientWidth || 600;
+      const aspectRatio = naturalWidth / naturalHeight;
+
+      let idealHeight = containerWidth / aspectRatio;
+
+      const minHeight = 250;
+      const maxByViewport = Math.max(350, Math.floor(window.innerHeight * 0.6));
+      const maxAllowed = Math.min(500, maxByViewport);
+      
+      idealHeight = Math.max(minHeight, Math.min(idealHeight, maxAllowed));
+
+      carousel.style.height = Math.round(idealHeight) + 'px';
+    }, 50);
+  }
+
+  function updateCarousel(){
+    if (totalSlides === 0) return;
+
+    const translateX = -currentSlide * 100;
+    carouselTrack.style.transform = `translateX(${translateX}%)`;
+
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === currentSlide);
+    });
+
+    setTimeout(() => {
+      adjustCarouselHeight();
+    }, 100);
+  }
+
+  function nextSlide(){
+    if (totalSlides <= 1) return;
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide(){
+    if (totalSlides <= 1) return;
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  function goToSlide(slideIndex){
+    if (slideIndex < 0 || slideIndex >= totalSlides) return;
+    currentSlide = slideIndex;
+    updateCarousel();
+  }
+
+  function startAutoSlide() {
+    if (totalSlides <= 1) return;
+    stopAutoSlide();
+    autoSlideInterval = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = null;
+    }
+  }
+
+  if(open) open.addEventListener('click', () => showModal(modal));
+  if(open2) open2.addEventListener('click', () => showModal(modal));
+  if(close) close.addEventListener('click', () => hideModal(modal));
+  if(closeDownload) closeDownload.addEventListener('click', () => hideModal(modal));
+  if(installGuide) installGuide.addEventListener('click', () => showModal(installModal));
+  if(closeInstall) closeInstall.addEventListener('click', () => hideModal(installModal));
+
+  if(modal){
+    modal.addEventListener('click', (e) => { if(e.target === modal) hideModal(modal); });
+  }
+
+  if(installModal){
+    installModal.addEventListener('click', (e) => { if(e.target === installModal) hideModal(installModal); });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      if(modal && modal.classList.contains('show')) hideModal(modal);
+      if(installModal && installModal.classList.contains('show')) hideModal(installModal);
+    }
+    if(e.key === 'ArrowLeft') prevSlide();
+    if(e.key === 'ArrowRight') nextSlide();
+  });
+
+  if(prevBtn) prevBtn.addEventListener('click', prevSlide);
+  if(nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const targetContent = document.getElementById(targetTab);
+      if(targetContent) targetContent.classList.add('active');
+    });
+  });
+
+  if (typeof ResizeObserver !== 'undefined' && carousel) {
+    const resizeObserver = new ResizeObserver((entries) => {
+      clearTimeout(window.carouselResizeTimeout);
+      window.carouselResizeTimeout = setTimeout(() => {
+        adjustCarouselHeight();
+      }, 150);
+    });
+    resizeObserver.observe(carousel);
+  } else {
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(adjustCarouselHeight, 150);
+    });
+  }
+
+  initializeCarousel();
+  
+  setTimeout(() => {
+    if (isInitialized) {
+      startAutoSlide();
+    }
+  }, 1000);
+
+  if (carousel) {
+    carousel.addEventListener('mouseenter', stopAutoSlide);
+    carousel.addEventListener('mouseleave', startAutoSlide);
+  }
+
+  window.__oneai_carousel = { 
+    adjustCarouselHeight, 
+    nextSlide, 
+    prevSlide, 
+    goToSlide,
+    getCurrentSlide: () => currentSlide,
+    getTotalSlides: () => totalSlides
+  };
+})();
+</script>
+<script>
+(function(){
+  const logoWrap = document.querySelector('.brand .logo');
+  if (!logoWrap) return;
+
+  const logoImg = logoWrap.querySelector('img');
+  if (!logoImg) return;
+
+  const easterEggImage = 'https://i.imgur.com/ENTi5Li.jpeg';
+
+  const requiredClicks = 5;
+  const windowMs = 1200;
+  let clicks = [];
+
+  const preload = (url) => {
+    if (!url) return;
+    const p = new Image();
+    p.src = url;
+  };
+  preload(easterEggImage);
+
+  let showingEgg = false;
+  const originalSrc = logoImg.src;
+
+  function attemptSwap() {
+    const now = Date.now();
+    clicks = clicks.filter(ts => now - ts <= windowMs);
+    if (clicks.length >= requiredClicks) {
+      clicks = [];
+      toggleEgg();
+    }
+  }
+
+  function toggleEgg(){
+    const newSrc = showingEgg ? originalSrc : (easterEggImage || originalSrc);
+    if (logoImg.src === newSrc) {
+      showingEgg = !showingEgg;
+      return;
+    }
+
+    logoImg.classList.add('fading');
+
+    setTimeout(() => {
+      logoImg.src = newSrc;
+      void logoImg.offsetWidth;
+      logoImg.classList.remove('fading');
+      showingEgg = !showingEgg;
+    }, 340);
+  }
+
+  logoWrap.addEventListener('click', (e) => {
+    clicks.push(Date.now());
+    if (clicks.length > requiredClicks) clicks.shift();
+    attemptSwap();
+  });
+
+  logoWrap.setAttribute('tabindex', '0');
+  logoWrap.style.cursor = 'pointer';
+  logoWrap.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') toggleEgg();
+  });
+
+})();
+</script>
   </body>
 </html>
