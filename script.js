@@ -46,14 +46,6 @@
             if(changelogModal && changelogModal.classList.contains('show')) hideModal(changelogModal);
         }
     });
-    // my donation thingy (now fixed cuz my retardness placed it in the wrong spot)
-    const donateBtn = document.getElementById('donateBtn');
-    const donateModal = document.getElementById('donateModal');
-    const closeDonate = document.getElementById('closeDonate');
-    
-    if(donateBtn) donateBtn.addEventListener('click', () => showModal(donateModal));
-    if(closeDonate) closeDonate.addEventListener('click', () => hideModal(donateModal));
-    if(donateModal) donateModal.addEventListener('click', (e) => { if(e.target === donateModal) hideModal(donateModal); });
     
     document.addEventListener('keydown', (e) => {
         if(e.key === 'Escape'){
@@ -327,7 +319,28 @@
     logoWrap.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') toggleEgg();
     });
+    function showModal(modal) {
+        if (modal) {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+    }
 
+    function hideModal(modal) {
+        if (modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    }
+    // my donation thingy
+    const donateBtn = document.getElementById('donateBtn');
+    const donateModal = document.getElementById('donateModal');
+    const closeDonate = document.getElementById('closeDonate');
+    
+    if(donateBtn) donateBtn.addEventListener('click', () => showModal(donateModal));
+    if(closeDonate) closeDonate.addEventListener('click', () => hideModal(donateModal));
+    if(donateModal) donateModal.addEventListener('click', (e) => { if(e.target === donateModal) hideModal(donateModal); });
 })();
+
 
 
