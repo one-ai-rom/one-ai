@@ -325,8 +325,9 @@
             if(modal && modal.classList.contains('show')) hideModal(modal);
             if(installModal && installModal.classList.contains('show')) hideModal(installModal);
             if(changelogModal && changelogModal.classList.contains('show')) hideModal(changelogModal);
-            if(donateModal && donateModal.classList.contains('show')) hideModal(donateModal); // Add this line
+            if(donateModal && donateModal.classList.contains('show')) hideModal(donateModal);
         }
     });
 
 })();
+
