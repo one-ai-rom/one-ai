@@ -311,5 +311,22 @@
     logoWrap.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') toggleEgg();
     });
+    // my donation thingy
+    const donateBtn = document.getElementById('donateBtn');
+    const donateModal = document.getElementById('donateModal');
+    const closeDonate = document.getElementById('closeDonate');
+    
+    if(donateBtn) donateBtn.addEventListener('click', () => showModal(donateModal));
+    if(closeDonate) closeDonate.addEventListener('click', () => hideModal(donateModal));
+    if(donateModal) donateModal.addEventListener('click', (e) => { if(e.target === donateModal) hideModal(donateModal); });
+    
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape'){
+            if(modal && modal.classList.contains('show')) hideModal(modal);
+            if(installModal && installModal.classList.contains('show')) hideModal(installModal);
+            if(changelogModal && changelogModal.classList.contains('show')) hideModal(changelogModal);
+            if(donateModal && donateModal.classList.contains('show')) hideModal(donateModal); // Add this line
+        }
+    });
 
 })();
