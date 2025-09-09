@@ -22,7 +22,7 @@
 
         <nav>
           <a class="btn" href="https://t.me/OneAI_community" target="_blank">Telegram</a>
-          <a class="btn" href="https://paypal.me/matteomeogrossi02" target="_blank">Donate</a>
+          <button class="btn" id="donateBtn">Donate</button>
           <button class="btn" id="changelogBtn">Changelog</button>
           <button class="btn" id="installGuide">Install Guide</button>
         </nav>
@@ -118,6 +118,20 @@
       </footer>
     </div>
 
+    <!-- Donation Modal -->
+    <div class="modal" id="donateModal">
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="donate-modal-title">
+        <button class="modal-close" id="closeDonate">×</button>
+        <h3 id="donate-modal-title">Support OneAI Development</h3>
+        <p class="small">Choose your preferred donation. Your support helps keep OneAI development active!</p>
+        <div class="modal-actions">
+          <a class="btn" href="https://paypal.me/matteomeogrossi02" target="_blank">Matteo</a>
+          <a class="btn" href="https://www.paypal.com/paypalme/antibundle" target="_blank">Kusoi</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- S21U Model Selection Modal -->
     <div class="modal" id="modal">
       <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <button class="modal-close" id="close">×</button>
@@ -130,6 +144,7 @@
       </div>
     </div>
 
+    <!-- Install Guide Modal -->
     <div class="modal install-modal" id="installModal">
       <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
         <button class="modal-close" id="closeInstall">×</button>
@@ -308,6 +323,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Changelog Modal -->
     <div class="modal install-modal" id="changelogModal">
         <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="changelog-modal-title">
             <button class="modal-close" id="closeChangelog">×</button>
