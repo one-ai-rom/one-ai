@@ -38,7 +38,7 @@
     if(modal) modal.addEventListener('click', (e) => { if(e.target === modal) hideModal(modal); });
     if(installModal) installModal.addEventListener('click', (e) => { if(e.target === installModal) hideModal(installModal); });
     if(changelogModal) changelogModal.addEventListener('click', (e) => { if(e.target === changelogModal) hideModal(changelogModal); });
-    // added one for s21 series now
+    // matteo i added one for s21 series now
     const s21Modal = document.getElementById('s21Modal');
     const openS21ModalBtn = document.getElementById('openS21Modal');
     const closeS21ModalBtn = document.getElementById('closeS21Modal');
