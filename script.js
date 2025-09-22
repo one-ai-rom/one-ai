@@ -13,62 +13,39 @@
         }
     }
 
-    const modal = document.getElementById('modal');
+    const s21Modal = document.getElementById('s21Modal');
+    const s21UModal = document.getElementById('s21UModal');
     const installModal = document.getElementById('installModal');
     const changelogModal = document.getElementById('changelogModal');
+    const donateModal = document.getElementById('donateModal');
 
-    const open2 = document.getElementById('openModal2');
-    const close = document.getElementById('close');
-
-    const installGuideBtn = document.getElementById('installGuide');
-    const closeInstall = document.getElementById('closeInstall');
-
-    const changelogBtn = document.getElementById('changelogBtn');
-    const closeChangelog = document.getElementById('closeChangelog');
-
-    if(open2) open2.addEventListener('click', () => showModal(modal));
-    if(close) close.addEventListener('click', () => hideModal(modal));
-
-    if(installGuideBtn) installGuideBtn.addEventListener('click', () => showModal(installModal));
-    if(closeInstall) closeInstall.addEventListener('click', () => hideModal(installModal));
-
-    if(changelogBtn) changelogBtn.addEventListener('click', () => showModal(changelogModal));
-    if(closeChangelog) closeChangelog.addEventListener('click', () => hideModal(changelogModal));
-
-    if(modal) modal.addEventListener('click', (e) => { if(e.target === modal) hideModal(modal); });
-    if(installModal) installModal.addEventListener('click', (e) => { if(e.target === installModal) hideModal(installModal); });
-    if(changelogModal) changelogModal.addEventListener('click', (e) => { if(e.target === changelogModal) hideModal(changelogModal); });
-    // matteo i added one for s21 series now
-    const s21Modal = document.getElementById('s21Modal');
-    const openS21ModalBtn = document.getElementById('openS21Modal');
-    const closeS21ModalBtn = document.getElementById('closeS21Modal');
-
-    if (s21Modal && openS21ModalBtn && closeS21ModalBtn) {
-      openS21ModalBtn.addEventListener('click', () => {
-        s21Modal.style.display = 'flex';
-      });
-
-      closeS21ModalBtn.addEventListener('click', () => {
-        s21Modal.style.display = 'none';
-      });
+    function setupModal(modal, openBtn, closeBtn) {
+        if(modal && openBtn && closeBtn) {
+            openBtn.addEventListener('click', () => showModal(modal));
+            closeBtn.addEventListener('click', () => hideModal(modal));
+            modal.addEventListener('click', (e) => { 
+                if(e.target === modal) hideModal(modal); 
+            });
+        }
     }
+    
+    setupModal(s21Modal, document.getElementById('openS21Modal'), document.getElementById('closeS21Modal'));
+    
+    setupModal(s21UModal, document.getElementById('openS21UModal'), document.getElementById('closeS21UModal'));
+
+    setupModal(installModal, document.getElementById('installGuide'), document.getElementById('closeInstall'));
+    
+    setupModal(changelogModal, document.getElementById('changelogBtn'), document.getElementById('closeChangelog'));
+
+    setupModal(donateModal, document.getElementById('donateBtn'), document.getElementById('closeDonate'));
 
     document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape'){
-            if(modal && modal.classList.contains('show')) hideModal(modal);
-            if(installModal && installModal.classList.contains('show')) hideModal(installModal);
-            if(changelogModal && changelogModal.classList.contains('show')) hideModal(changelogModal);
+        if (e.key === 'Escape') {
+            const openModals = document.querySelectorAll('.modal.show');
+            openModals.forEach(hideModal);
         }
     });
-    
-    document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape'){
-            if(modal && modal.classList.contains('show')) hideModal(modal);
-            if(installModal && installModal.classList.contains('show')) hideModal(installModal);
-            if(changelogModal && changelogModal.classList.contains('show')) hideModal(changelogModal);
-            if(donateModal && donateModal.classList.contains('show')) hideModal(donateModal);
-        }
-    });
+
     const carouselImages = [
         { src: 'https://i.imgur.com/g0J8vV3.jpeg', alt: 'OneAI Screenshot 1' },
         { src: 'https://i.imgur.com/xymeNw6.jpeg', alt: 'OneAI Settings Screenshot' },
@@ -106,15 +83,15 @@
             img.alt = imageData.alt || '';
             img.loading = 'lazy';
 
-            const loadPromise = new Promise((resolve, reject) => {
+            const loadPromise = new Promise((resolve) => {
                 const tempImg = new Image();
                 tempImg.onload = () => {
                     img.src = tempImg.src;
-                    resolve({ index, img, naturalWidth: tempImg.naturalWidth, naturalHeight: tempImg.naturalHeight });
+                    resolve();
                 };
                 tempImg.onerror = () => {
                     img.src = 'https://via.placeholder.com/800x450?text=Preview+unavailable';
-                    resolve({ index, img, naturalWidth: 800, naturalHeight: 450 });
+                    resolve();
                 };
                 tempImg.src = imageData.src;
             });
@@ -139,11 +116,7 @@
         if (totalSlides <= 1) {
             if (prevBtn) prevBtn.style.display = 'none';
             if (nextBtn) nextBtn.style.display = 'none';
-            indicatorsContainer.style.display = 'none';
-        } else {
-            if (prevBtn) prevBtn.style.display = 'grid';
-            if (nextBtn) nextBtn.style.display = 'grid';
-            indicatorsContainer.style.display = 'flex';
+            if (indicatorsContainer) indicatorsContainer.style.display = 'none';
         }
 
         if (imageLoadPromises[0]) {
@@ -156,42 +129,22 @@
 
     function adjustCarouselHeight() {
         if (!carousel || totalSlides === 0 || !isInitialized) return;
-
-        const currentSlideElement = carouselTrack.children[currentSlide];
-        if (!currentSlideElement) return;
-
-        const currentImg = currentSlideElement.querySelector('img');
-        if (!currentImg || !currentImg.naturalWidth) {
-            setTimeout(adjustCarouselHeight, 100);
-            return;
-        }
-
-        const naturalWidth = currentImg.naturalWidth;
-        const naturalHeight = currentImg.naturalHeight;
-        const containerWidth = carousel.clientWidth;
-        const aspectRatio = naturalWidth / naturalHeight;
-
-        let idealHeight = containerWidth / aspectRatio;
+        const currentImg = carouselTrack.children[currentSlide]?.querySelector('img');
+        if (!currentImg || !currentImg.naturalWidth) return;
+        
+        const aspectRatio = currentImg.naturalWidth / currentImg.naturalHeight;
+        let idealHeight = carousel.clientWidth / aspectRatio;
 
         const minHeight = 250;
-        const maxByViewport = Math.max(350, Math.floor(window.innerHeight * 0.6));
-        const maxAllowed = Math.min(500, maxByViewport);
-
+        const maxAllowed = Math.min(500, Math.max(350, Math.floor(window.innerHeight * 0.6)));
         idealHeight = Math.max(minHeight, Math.min(idealHeight, maxAllowed));
-
-        carousel.style.height = Math.round(idealHeight) + 'px';
+        carousel.style.height = `${Math.round(idealHeight)}px`;
     }
 
     function updateCarousel(){
         if (totalSlides === 0 || !carouselTrack) return;
-
-        const translateX = -currentSlide * 100;
-        carouselTrack.style.transform = `translateX(${translateX}%)`;
-
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentSlide);
-        });
-
+        carouselTrack.style.transform = `translateX(${-currentSlide * 100}%)`;
+        indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === currentSlide));
         adjustCarouselHeight();
     }
 
@@ -208,11 +161,12 @@
     }
 
     function goToSlide(slideIndex){
-        if (slideIndex < 0 || slideIndex >= totalSlides) return;
-        currentSlide = slideIndex;
-        updateCarousel();
+        if (slideIndex >= 0 && slideIndex < totalSlides) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
     }
-
+    
     function startAutoSlide() {
         if (totalSlides <= 1) return;
         stopAutoSlide();
@@ -220,141 +174,64 @@
     }
 
     function stopAutoSlide() {
-        if (autoSlideInterval) {
-            clearInterval(autoSlideInterval);
-            autoSlideInterval = null;
-        }
+        clearInterval(autoSlideInterval);
     }
-
-    if(prevBtn) prevBtn.addEventListener('click', prevSlide);
-    if(nextBtn) nextBtn.addEventListener('click', nextSlide);
-    document.addEventListener('keydown', (e) => {
-        if(e.key === 'ArrowLeft') prevSlide();
-        if(e.key === 'ArrowRight') nextSlide();
-    });
-
+    
+    if (carousel) {
+        initializeCarousel();
+        if(prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if(nextBtn) nextBtn.addEventListener('click', nextSlide);
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowLeft') prevSlide();
+            if(e.key === 'ArrowRight') nextSlide();
+        });
+        
+        new ResizeObserver(adjustCarouselHeight).observe(carousel);
+        
+        setTimeout(() => { if (isInitialized) startAutoSlide(); }, 1000);
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', startAutoSlide);
+    }
+    
     const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const targetTab = btn.dataset.tab;
             tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             btn.classList.add('active');
             const targetContent = document.getElementById(targetTab);
             if(targetContent) targetContent.classList.add('active');
         });
     });
 
-    if (typeof ResizeObserver !== 'undefined' && carousel) {
-        const resizeObserver = new ResizeObserver(() => {
-            clearTimeout(window.carouselResizeTimeout);
-            window.carouselResizeTimeout = setTimeout(adjustCarouselHeight, 150);
-        });
-        resizeObserver.observe(carousel);
-    } else {
-        window.addEventListener('resize', () => {
-            clearTimeout(window.carouselResizeTimeout);
-            window.carouselResizeTimeout = setTimeout(adjustCarouselHeight, 150);
-        });
-    }
-
-    initializeCarousel();
-
-    setTimeout(() => {
-        if (isInitialized) {
-            startAutoSlide();
-        }
-    }, 1000);
-
-    if (carousel) {
-        carousel.addEventListener('mouseenter', stopAutoSlide);
-        carousel.addEventListener('mouseleave', startAutoSlide);
-    }
-})();
-
-(function(){
     const logoWrap = document.querySelector('.brand .logo');
-    if (!logoWrap) return;
+    if (logoWrap) {
+        const logoImg = logoWrap.querySelector('img');
+        const easterEggImage = 'https://i.imgur.com/ENTi5Li.jpeg';
+        let clicks = [];
+        let showingEgg = false;
+        const originalSrc = logoImg.src;
+        new Image().src = easterEggImage;
 
-    const logoImg = logoWrap.querySelector('img');
-    if (!logoImg) return;
-
-    const easterEggImage = 'https://i.imgur.com/ENTi5Li.jpeg';
-    const requiredClicks = 5;
-    const windowMs = 1200;
-    let clicks = [];
-
-    const preload = (url) => {
-        if (!url) return;
-        const p = new Image();
-        p.src = url;
-    };
-    preload(easterEggImage);
-
-    let showingEgg = false;
-    const originalSrc = logoImg.src;
-
-    function attemptSwap() {
-        const now = Date.now();
-        clicks = clicks.filter(ts => now - ts <= windowMs);
-        if (clicks.length >= requiredClicks) {
-            clicks = [];
-            toggleEgg();
-        }
-    }
-
-    function toggleEgg(){
-        const newSrc = showingEgg ? originalSrc : (easterEggImage || originalSrc);
-        if (logoImg.src === newSrc) {
-            showingEgg = !showingEgg;
-            return;
+        function toggleEgg() {
+            const newSrc = showingEgg ? originalSrc : easterEggImage;
+            logoImg.classList.add('fading');
+            setTimeout(() => {
+                logoImg.src = newSrc;
+                logoImg.classList.remove('fading');
+                showingEgg = !showingEgg;
+            }, 340);
         }
 
-        logoImg.classList.add('fading');
-
-        setTimeout(() => {
-            logoImg.src = newSrc;
-            void logoImg.offsetWidth;
-            logoImg.classList.remove('fading');
-            showingEgg = !showingEgg;
-        }, 340);
+        logoWrap.addEventListener('click', () => {
+            const now = Date.now();
+            clicks.push(now);
+            clicks = clicks.filter(ts => now - ts <= 1200);
+            if (clicks.length >= 5) {
+                clicks = [];
+                toggleEgg();
+            }
+        });
     }
-
-    logoWrap.addEventListener('click', (e) => {
-        clicks.push(Date.now());
-        if (clicks.length > requiredClicks) clicks.shift();
-        attemptSwap();
-    });
-
-    logoWrap.setAttribute('tabindex', '0');
-    logoWrap.style.cursor = 'pointer';
-    logoWrap.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') toggleEgg();
-    });
-    function showModal(modal) {
-        if (modal) {
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-    }
-
-    function hideModal(modal) {
-        if (modal) {
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-    }
-    // my donation thingy
-    const donateBtn = document.getElementById('donateBtn');
-    const donateModal = document.getElementById('donateModal');
-    const closeDonate = document.getElementById('closeDonate');
-    
-    if(donateBtn) donateBtn.addEventListener('click', () => showModal(donateModal));
-    if(closeDonate) closeDonate.addEventListener('click', () => hideModal(donateModal));
-    if(donateModal) donateModal.addEventListener('click', (e) => { if(e.target === donateModal) hideModal(donateModal); });
 })();
-
-
-
