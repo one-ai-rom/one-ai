@@ -520,20 +520,18 @@ main{
 
 .download-grid{display:grid;grid-template-columns:1fr;gap:10px}
 
-.download-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 18px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.01);
-  border:1px solid rgba(255,255,255,0.06);
-  transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
-  position:relative;
-  overflow:hidden;
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeInUp 0.6s ease-out forwards;
+.download-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out forwards;
 }
 
 .download-item:nth-child(1) { animation-delay: 0.5s; }
