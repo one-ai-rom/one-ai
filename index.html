@@ -1,484 +1,651 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>OneAI by MatteoMeo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <div class="brand">
-          <div class="logo" aria-hidden>
-            <img src="https://i.imgur.com/g4PKkiO.png" alt="OneAI Logo" />
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OneAI — Faster. Cleaner. More in control.</title>
+  <meta name="description" content="OneAI is a carefully curated One UI port with performance tweaks, Galaxy AI, and minimal compromises for Samsung Galaxy S21 series." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ─── HEADER ─── -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo-wrap" id="logoWrap" tabindex="0" aria-label="OneAI logo — click 5 times for a surprise" role="button">
+          <img src="https://i.imgur.com/g4PKkiO.png" alt="OneAI" width="52" height="52" id="logoImg" />
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">OneAI</span>
+          <span class="brand-sub">One UI Port · Galaxy S21 Series</span>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a class="nav-link" href="https://t.me/OneAI_community" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.958 14.34l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.83.953l-.74.466z"/></svg>
+          Telegram
+        </a>
+        <button class="nav-link" id="changelogBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+          Changelog
+        </button>
+        <button class="nav-link" id="installGuideBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Install Guide
+        </button>
+        <button class="nav-link btn-primary" id="donateBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Donate
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIcon"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a class="mobile-link" href="https://t.me/OneAI_community" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <button class="mobile-link" id="mChangelogBtn">Changelog</button>
+      <button class="mobile-link" id="mInstallBtn">Install Guide</button>
+      <button class="mobile-link" id="mDonateBtn">Donate</button>
+    </div>
+  </header>
+
+  <!-- ─── MAIN ─── -->
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-content">
+        <div class="hero-left">
+          <span class="badge badge-stable" aria-label="Current build status">
+            <span class="badge-dot"></span>Stable Build · v7.3
+          </span>
+          <h1 id="hero-heading">Faster. Cleaner.<br><span class="gradient-text">More in control.</span></h1>
+          <p class="hero-lead">OneAI is a carefully curated One UI port with performance tweaks, enhanced Galaxy AI, and minimal compromises. Odin-friendly with an active community.</p>
+          <div class="hero-actions">
+            <button class="btn-cta" id="heroDownloadBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download ROM
+            </button>
+            <button class="btn-ghost" id="heroInstallBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Install Guide
+            </button>
           </div>
-          <div>
-            <h1>OneAI Rom</h1>
-            <div class="tag">Optimized • Odin-friendly • One UI ports</div>
+        </div>
+
+        <div class="hero-right">
+          <div class="build-card">
+            <div class="build-card-header">
+              <span class="build-card-label">Latest Release</span>
+              <span class="build-version">v7.3</span>
+            </div>
+            <div class="build-stats">
+              <div class="stat">
+                <span class="stat-value">4</span>
+                <span class="stat-label">Devices</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value">Sep '25</span>
+                <span class="stat-label">Last update</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value">One UI 8</span>
+                <span class="stat-label">Base</span>
+              </div>
+            </div>
+            <div class="build-tags">
+              <span class="tag">Galaxy AI</span>
+              <span class="tag">KnoxPatch</span>
+              <span class="tag">Deknoxed</span>
+              <span class="tag">Proton Kernel</span>
+              <span class="tag">EROFS</span>
+              <span class="tag">Dirty-flashable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD SELECTOR -->
+    <section class="section" id="download" aria-labelledby="download-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="download-heading">Download</h2>
+          <p class="section-sub">Select your device to get the right build</p>
+        </div>
+
+        <div class="device-selector">
+          <label class="selector-label" for="deviceSelect">Your device</label>
+          <select id="deviceSelect" class="device-select" aria-label="Select your device model">
+            <option value="">— Pick your model —</option>
+            <optgroup label="Galaxy S21">
+              <option value="s21-g991b">Galaxy S21 (SM-G991B)</option>
+              <option value="s21-g991n">Galaxy S21 (SM-G991N)</option>
+            </optgroup>
+            <optgroup label="Galaxy S21+">
+              <option value="s21p-g996b">Galaxy S21+ (SM-G996B)</option>
+            </optgroup>
+            <optgroup label="Galaxy S21 Ultra">
+              <option value="s21u-g998b">Galaxy S21 Ultra (SM-G998B)</option>
+              <option value="s21u-g998n">Galaxy S21 Ultra (SM-G998N)</option>
+            </optgroup>
+            <optgroup label="Galaxy S21 FE">
+              <option value="s21fe-g990e">Galaxy S21 FE (SM-G990E)</option>
+            </optgroup>
+          </select>
+
+          <div class="download-result" id="downloadResult" aria-live="polite">
+            <div class="download-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+              <p>Select your device model above</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section section-alt" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="features-heading">What's inside</h2>
+          <p class="section-sub">Everything you need, nothing you don't</p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card feature-card--large">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="18" cy="6" r="3" fill="currentColor" stroke="none" opacity=".3"/><path d="M18 3v3l2 1" stroke-width="1.5"/></svg>
+            </div>
+            <h3>Enhanced Galaxy AI</h3>
+            <p>All Galaxy AI features preinstalled and significantly improved over the official version — including exclusive Chinese Galaxy AI features.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3>Properly Optimized</h3>
+            <p>Surpasses Samsung's own optimizations — minimal RAM &amp; battery usage, enhanced performance with Proton kernel 5.5.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+            </div>
+            <h3>Deknoxed &amp; KnoxPatch</h3>
+            <p>Knox removed for better performance, heat management and system control. Knox-related apps still work via built-in KnoxPatch.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </div>
+            <h3>Audio Mods</h3>
+            <p>More audio modes unlocked, compression disabled, sounds ported from ZFlip 7 for superior quality.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+            </div>
+            <h3>Patch-set</h3>
+            <p>Built-in patches for 4-digit PIN, app downgrades, FRP bypass, valid attestations, and enhanced battery info.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Active Community</h3>
+            <p>Join the Telegram group for discussion, help, updates and direct contact with the development team.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREVIEW CAROUSEL -->
+    <section class="section" aria-labelledby="preview-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="preview-heading">Preview</h2>
+          <p class="section-sub">See OneAI in action</p>
+        </div>
+
+        <div class="carousel-wrap">
+          <div class="carousel" id="carousel" role="region" aria-label="Screenshot gallery" aria-roledescription="carousel">
+            <div class="carousel-track" id="carouselTrack"></div>
+            <button class="carousel-btn carousel-btn--prev" id="prevBtn" aria-label="Previous screenshot">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+            </button>
+            <button class="carousel-btn carousel-btn--next" id="nextBtn" aria-label="Next screenshot">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+            </button>
+          </div>
+          <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Slide indicators"></div>
+          <div class="carousel-counter" aria-live="polite" aria-atomic="true">
+            <span id="slideCounter">1</span> / <span id="slideTotalCount">6</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDITS -->
+    <section class="section section-alt" aria-labelledby="credits-heading">
+      <div class="container container--narrow">
+        <div class="section-header">
+          <h2 id="credits-heading">Credits</h2>
+          <p class="section-sub">The team behind OneAI</p>
+        </div>
+        <div class="credits-grid">
+          <div class="credit-card credit-card--lead">
+            <div class="credit-avatar" aria-hidden="true">M</div>
+            <div>
+              <strong>MatteoMeo</strong>
+              <span class="credit-role">Main Developer</span>
+              <p class="credit-desc">ROM building, system optimizations, bug fixes and releases.</p>
+            </div>
+          </div>
+          <div class="credit-card">
+            <div class="credit-avatar" aria-hidden="true">F</div>
+            <div>
+              <strong>Fwp</strong>
+              <span class="credit-role">Developer</span>
+              <p class="credit-desc">Testing and kernel work.</p>
+            </div>
+          </div>
+          <div class="credit-card">
+            <div class="credit-avatar" aria-hidden="true">E</div>
+            <div>
+              <strong>Extreme</strong>
+              <span class="credit-role">Helper</span>
+              <p class="credit-desc">KnoxPatch, verify app signature disabler patches (ExtremeROM).</p>
+            </div>
+          </div>
+          <div class="credit-card">
+            <div class="credit-avatar" aria-hidden="true">D</div>
+            <div>
+              <strong>Devcore</strong>
+              <span class="credit-role">Helper</span>
+              <p class="credit-desc">OneUI8 apps and assistance on various topics.</p>
+            </div>
+          </div>
+          <div class="credit-card">
+            <div class="credit-avatar" aria-hidden="true">B</div>
+            <div>
+              <strong>BeyondRom Dev</strong>
+              <span class="credit-role">Helper</span>
+              <p class="credit-desc">Building and fixing Odin-flashable ROM.</p>
+            </div>
+          </div>
+          <div class="credit-card">
+            <div class="credit-avatar" aria-hidden="true">E</div>
+            <div>
+              <strong>EliteGalaxy</strong>
+              <span class="credit-role">Helper</span>
+              <p class="credit-desc">General support and assistance.</p>
+            </div>
+          </div>
+          <div class="credit-card">
+            <div class="credit-avatar credit-avatar--accent" aria-hidden="true">K</div>
+            <div>
+              <strong>Kusoi</strong>
+              <span class="credit-role">Web &amp; Bot</span>
+              <p class="credit-desc">Website, bots, and practically everything tech-adjacent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2025 OneAI — by Kusoi &amp; MatteoMeo</p>
+      <div class="footer-links">
+        <a href="https://t.me/OneAI_community" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <button id="footerInstallBtn">Install Guide</button>
+        <a href="#main-content">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── MOBILE DOWNLOAD FAB ─── -->
+  <button class="fab" id="fabDownload" aria-label="Download latest build">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download
+  </button>
+
+  <!-- ─── MODALS ─── -->
+
+  <!-- Donate Modal -->
+  <div class="modal" id="donateModal" role="dialog" aria-modal="true" aria-labelledby="donate-title" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close="donateModal" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h3 id="donate-title">Support OneAI</h3>
+      <p class="modal-sub">Your support keeps development active. Choose a developer to support:</p>
+      <div class="donate-grid">
+        <a class="donate-card" href="https://paypal.me/matteomeogrossi02" target="_blank" rel="noopener noreferrer">
+          <div class="donate-avatar">M</div>
+          <strong>MatteoMeo</strong>
+          <span>Main Developer</span>
+          <span class="donate-link">Donate via PayPal →</span>
+        </a>
+        <a class="donate-card" href="https://www.paypal.com/paypalme/antibundle" target="_blank" rel="noopener noreferrer">
+          <div class="donate-avatar donate-avatar--muted">K</div>
+          <strong>Kusoi</strong>
+          <span>Web &amp; Bot Dev</span>
+          <span class="donate-link">Donate via PayPal →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Changelog Modal -->
+  <div class="modal modal--wide" id="changelogModal" role="dialog" aria-modal="true" aria-labelledby="changelog-title" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close="changelogModal" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h3 id="changelog-title">Changelog</h3>
+
+      <div class="changelog-filters" role="group" aria-label="Filter changelog by type">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="new">✨ New</button>
+        <button class="filter-btn" data-filter="improved">🚀 Improved</button>
+        <button class="filter-btn" data-filter="fixed">🔧 Fixed</button>
+      </div>
+
+      <div class="changelog-list" id="changelogList">
+
+        <div class="changelog-entry">
+          <div class="changelog-version">
+            <h4>Version 7.3</h4>
+            <span class="changelog-date">September 21, 2025</span>
+            <span class="changelog-dirty">Dirty-flashable over v7.2+</span>
+          </div>
+
+          <div class="changelog-section" data-type="new">
+            <h5><span class="cl-icon cl-new">✨</span> New</h5>
+            <ul>
+              <li>Rebased with latest binary for every device</li>
+              <li>Renamed Tar files for easier flashing</li>
+              <li>KnoxPatch and Deknox fully integrated in system — no external modules needed</li>
+              <li>Secure Folder support restored</li>
+              <li>FRP bypassed</li>
+              <li>Spoofed locked bootloader for valid attestations</li>
+            </ul>
+          </div>
+          <div class="changelog-section" data-type="improved">
+            <h5><span class="cl-icon cl-improved">🚀</span> Improved</h5>
+            <ul>
+              <li>RAM management optimization</li>
+              <li>General system optimizations</li>
+              <li>Proton 5.5 with latest upstream</li>
+              <li>More bloat removed from system</li>
+            </ul>
+          </div>
+          <div class="changelog-section" data-type="fixed">
+            <h5><span class="cl-icon cl-fixed">🔧</span> Fixed</h5>
+            <ul>
+              <li>RAW photos in Pro Camera mode</li>
+              <li>Fullscreen AOD disabled (bugged brightness)</li>
+              <li>Various minor bug fixes</li>
+            </ul>
           </div>
         </div>
 
-        <nav>
-          <a class="btn" href="https://t.me/OneAI_community" target="_blank">Telegram</a>
-          <button class="btn" id="donateBtn">Donate</button>
-          <button class="btn" id="changelogBtn">Changelog</button>
-          <button class="btn" id="installGuide">Install Guide</button>
-        </nav>
-      </header>
-
-      <main>
-        <div class="main-content">
-          <section class="hero" id="features">
-            <div class="eyebrow">Stable Build</div>
-            <h2 class="headline">Faster. Cleaner. More in control.</h2>
-            <p class="lead">OneAI is a carefully curated One UI port with performance tweaks, added features and minimal compromises. Flash with Odin. Easy to follow guide and active community support.</p>
-
-            <div class="features">
-              <div class="feature">
-                <h3>Enhanced Galaxy AI</h3>
-                <p>Comes with all Galaxy AI preinstalled, significantly better than the official version, and includes even some Chinese Galaxy AI features.</p>
-              </div>
-              <div class="feature">
-                <h3>Properly Optimized</h3>
-                <p>Highly optimized, surpassing Samsung's efforts, with minimal RAM and battery usage and enhanced performance..</p>
-              </div>
-              <div class="feature">
-                <h3>Deknoxed and KnoxPatch</h3>
-                <p>Removed all that useless knox stuff to have better performance, better heat and better system control without limitations and patched the rest of knox to use knox related apps with unlocked bootloader..</p>
-              </div>
-              <div class="feature">
-                <h3>Audio Mods</h3>
-                <p>Enabled more audio modes, disabled compression, and sounds ported from ZFlip 7 for superior quality.</p>
-              </div>
-            </div>
-
-            <div class="cards">
-              <div class="card">
-                <h3>Patch-set</h3>
-                <p>Built-in patches for 4-digit PIN, app downgrades and enhanced battery info.</p>
-              </div>
-              <div class="card">
-                <h3>Flash-friendly</h3>
-                <p>Odinpacked with clear instructions so flashing is painless.</p>
-              </div>
-              <div class="card">
-                <h3>Active Community</h3>
-                <p>Join Telegram for discussion, help and further updates.</p>
-              </div>
-            </div>
-          </section>
-
-          <section class="credits-section">
-            <h3>Credits</h3>
-            <p>Meet the team behind OneAI</p>
-            <div class="credits-grid">
-              <div class="person"><strong>MatteoMeo</strong><div class="small">Main developer — ROM, optimizations, fixes.</div></div>
-              <div class="person"><strong>Fwp</strong><div class="small">Developer - Testing and kernel work.</div></div>
-              <div class="person"><strong>Extreme</strong><div class="small">Helper — for ExtremeROM knoxpatch and verify app signature disabler patches.</div></div>
-              <div class="person"><strong>Devcore</strong><div class="small">Helper - for some OneUI8 apps and some help on various things.</div></div>
-              <div class="person"><strong>BeyondRom Dev</strong><div class="small">Helper - for helping me build and fix odin flashable rom.</div></div>
-              <div class="person"><strong>EliteGalaxy</strong><div class="small">Helper - General helping.</div></div>
-              <div class="person"><strong>Kusoi</strong><div class="small">Unpaid Slave - Practically anything website or bot related.</div></div>
-            </div>
-          </section>
+        <div class="changelog-entry">
+          <div class="changelog-version">
+            <h4>Version 7.2</h4>
+            <span class="changelog-date">August 27, 2025</span>
+          </div>
+          <div class="changelog-section" data-type="new">
+            <h5><span class="cl-icon cl-new">✨</span> New</h5>
+            <ul>
+              <li>EROFS filesystem for better performance and smaller partitions</li>
+              <li>Game Tools re-added</li>
+              <li>Link to Windows re-added</li>
+              <li>Updated OneAI Bootlogo</li>
+            </ul>
+          </div>
+          <div class="changelog-section" data-type="improved">
+            <h5><span class="cl-icon cl-improved">🚀</span> Improved</h5>
+            <ul>
+              <li>Additional bloat removed (including unnecessary Chinese Galaxy AI components)</li>
+              <li>Heat and battery performance further improved</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="sidebar">
-          <aside class="sidecard" id="download">
-            <h4>Downloads</h4>
-            <div class="download-grid">
-              <div class="download-item"><strong>S21 (G991B/N)</strong><span class="small"><button class="btn" id="openS21Modal">Choose</button></span></div>
-              <div class="download-item"><strong>S21+ (G996B)</strong><span class="small"><a href="https://drive.google.com/file/d/1uAdBa1Pp27MDYGxala-529dTLUe9taoZ/view?usp=drivesdk" class="btn">Direct</a></span></div>
-              <div class="download-item"><strong>S21U (G998B/N)</strong><span class="small"><button class="btn" id="openModal2">Choose</button></span></div>
-              <div class="download-item"><strong>S21 FE (G990E)</strong><span class="small"><a href="https://drive.google.com/file/d/1mzq8ET6AeaaRU5ALZHCYA8B-DJqdZ6a_/view?usp=drivesdk" class="btn">Direct</a></span></div>
-            </div>
-          </aside>
-
-          <aside class="preview" aria-labelledby="preview-heading">
-            <h4 id="preview-heading">Preview</h4>
-            <div class="carousel" id="carousel">
-              <div class="carousel-track" id="carouselTrack">
-              </div>
-              
-              <button class="carousel-nav nav-left" id="prevBtn">‹</button>
-              <button class="carousel-nav nav-right" id="nextBtn">›</button>
-              
-              <div class="indicators" id="indicators">
-              </div>
-            </div>
-          </aside>
-        </div>
-      </main>
-
-      <footer>
-        <p>© 2025 OneAI, By Kusoi — All rights reserved</p>
-        <div class="controls"><a class="btn" href="#features">Back to top</a></div>
-      </footer>
-    </div>
-
-    <div class="modal" id="donateModal">
-      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="donate-modal-title">
-        <button class="modal-close" id="closeDonate">×</button>
-        <h3 id="donate-modal-title">Support OneAI Development</h3>
-        <p class="small">Choose your preferred donation. Your support helps keep OneAI development active!</p>
-        <div class="modal-actions">
-          <a class="btn" href="https://paypal.me/matteomeogrossi02" target="_blank">Matteo</a>
-          <a class="btn" href="https://www.paypal.com/paypalme/antibundle" target="_blank">Kusoi (Poor)</a>
-        </div>
       </div>
     </div>
-    
-    <div class="modal" id="s21Modal">
-      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="s21-modal-title">
-        <button class="modal-close" id="closeS21Modal">×</button>
-        <h3 id="s21-modal-title">Choose S21 build</h3>
-        <p class="small">Pick the file for your model. These open in a new tab.</p>
-        <div class="modal-actions">
-          <a class="btn" href="https://drive.google.com/file/d/1YCKz-LFOxCd-jonXhY6LtgT-NPMJtlwJ/view?usp=drivesdk" target="_blank">G991B</a>
-          <a class="btn" href="https://drive.google.com/file/d/1NrdrBYR7NOHXHsPdd7_dwBqxVWx98NLw/view?usp=drivesdk" target="_blank">G991N</a>
-        </div>
-      </div>
-    </div>
+  </div>
 
-    <div class="modal" id="modal">
-      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <button class="modal-close" id="close">×</button>
-        <h3 id="modal-title">Choose S21U build</h3>
-        <p class="small">Pick the file for your model. These open in a new tab.</p>
-        <div class="modal-actions">
-          <a class="btn" href="https://drive.google.com/file/d/1DZP9p9zfifgVkM0_EyguHmuy9bEDhOlD/view?usp=drivesdk" target="_blank">G998B</a>
-          <a class="btn" href="https://drive.google.com/file/d/16NO0Ik4P7MLHYWx3Ij7ie1nUSGwgpSBh/view?usp=drivesdk" target="_blank">G998N</a>
-        </div>
-      </div>
-    </div>
+  <!-- Install Guide Modal -->
+  <div class="modal modal--wide" id="installModal" role="dialog" aria-modal="true" aria-labelledby="install-title" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close="installModal" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h3 id="install-title">Installation Guide</h3>
 
-    <div class="modal install-modal" id="installModal">
-      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
-        <button class="modal-close" id="closeInstall">×</button>
-        <h3 id="install-modal-title">Installation Guide</h3>
-        <p class="small">Choose your installation method below. Follow each step carefully.</p>
-        
-        <div class="install-tabs">
-          <button class="tab-btn active" data-tab="stock">From Stock ROM</button>
-          <button class="tab-btn" data-tab="custom">From Custom ROM</button>
-          <button class="tab-btn" data-tab="older">From Older OneAI</button>
-        </div>
-        
-        <div class="tab-content active" id="stock">
-          <div class="install-step danger">
-            <h4><span class="step-icon">⚠</span>Critical Warning</h4>
-            <p><strong>BACKUP YOUR DATA FIRST!</strong> This process will completely wipe your device. Make sure you have:</p>
+      <div class="install-tabs" role="tablist" aria-label="Installation method">
+        <button class="itab active" role="tab" aria-selected="true" aria-controls="tab-stock" id="tab-btn-stock" data-tab="stock">From Stock ROM</button>
+        <button class="itab" role="tab" aria-selected="false" aria-controls="tab-custom" id="tab-btn-custom" data-tab="custom">From Custom ROM</button>
+        <button class="itab" role="tab" aria-selected="false" aria-controls="tab-update" id="tab-btn-update" data-tab="update">Update OneAI</button>
+      </div>
+
+      <!-- Tab: Stock ROM -->
+      <div class="itab-content active" id="tab-stock" role="tabpanel" aria-labelledby="tab-btn-stock">
+        <details class="install-step step-danger" open>
+          <summary>
+            <span class="step-badge step-badge--danger">⚠ Critical</span>
+            Backup your data first!
+          </summary>
+          <div class="step-body">
+            <p>This process will <strong>completely wipe your device</strong>. Before flashing, make sure you have:</p>
             <ul>
               <li>Full device backup (photos, contacts, apps)</li>
-              <li>Your Google/Samsung account ready for restore</li>
+              <li>Google / Samsung account ready for restore</li>
               <li>Important files saved to cloud or PC</li>
             </ul>
           </div>
-          
-          <div class="install-step info">
-            <h4><span class="step-icon">1</span>Prerequisites & Downloads</h4>
-            <p>Before starting, ensure you have these tools ready:</p>
+        </details>
+
+        <details class="install-step step-info">
+          <summary>
+            <span class="step-badge">1</span>
+            Prerequisites &amp; Downloads
+          </summary>
+          <div class="step-body">
+            <p>Make sure you have:</p>
             <ul>
-              <li><span class="highlight">Unlocked bootloader</span> on your device</li>
-              <li><strong>Samsung Odin</strong> (latest version from developer)</li>
-              <li><strong>Samsung USB drivers</strong> installed on PC</li>
+              <li><strong>Unlocked bootloader</strong> on your device</li>
+              <li><strong>Samsung Odin</strong> (latest version)</li>
+              <li><strong>Samsung USB Drivers</strong> installed on PC</li>
               <li><strong>OneAI ROM</strong> for your exact device model</li>
-              <li>Quality USB-C cable (avoid cheap cables)</li>
+              <li>Quality USB-C cable</li>
             </ul>
           </div>
-          
-          <div class="install-step">
-            <h4><span class="step-icon">2</span>Prepare Your Device</h4>
-            <p>Set up your device for flashing:</p>
+        </details>
+
+        <details class="install-step">
+          <summary>
+            <span class="step-badge">2</span>
+            Prepare your device
+          </summary>
+          <div class="step-body">
             <ul>
               <li>Go to <code>Settings → Developer Options</code></li>
-              <li>Enable <span class="highlight">USB Debugging</span></li>
-              <li>Enable <span class="highlight">OEM Unlocking</span></li>
+              <li>Enable <strong>USB Debugging</strong></li>
+              <li>Enable <strong>OEM Unlocking</strong></li>
               <li>Power off your device completely</li>
-              <li>Boot into <strong>Download Mode</strong>: Hold <code>Volume Down + Volume Up + Power</code> while connecting USB cable</li>
+              <li>Boot into Download Mode: hold <kbd>Vol Down + Vol Up + Power</kbd> while connecting USB</li>
             </ul>
           </div>
-          
-          <div class="install-step warning">
-            <h4><span class="step-icon">3</span>Flash with Odin</h4>
-            <p><strong>IMPORTANT:</strong> Use CSC file, NOT HOME_CSC for clean installation!</p>
+        </details>
+
+        <details class="install-step step-warning">
+          <summary>
+            <span class="step-badge step-badge--warning">3</span>
+            Flash with Odin
+          </summary>
+          <div class="step-body">
+            <p><strong>Use CSC — NOT HOME_CSC</strong> for a clean install!</p>
             <ul>
-              <li>Open Odin as Administrator on your PC</li>
-              <li>Connect device (should show blue "Added" message)</li>
-              <li>Load OneAI files in correct slots:</li>
-              <ul>
-                <li><strong>AP:</strong> OneAI_AP_*.tar.md5</li>
-                <li><strong>BL:</strong> OneAI_BL_*.tar.md5</li>
-                <li><strong>CP:</strong> OneAI_CP_*.tar.md5</li>
-                <li><strong>CSC:</strong> OneAI_CSC_*.tar.md5 (NOT HOME_CSC!)</li>
-              </ul>
-              <li>Click <span class="highlight">Start</span> and wait (10-15 minutes)</li>
-              <li>Device will reboot automatically when done</li>
+              <li>Open Odin as Administrator on PC</li>
+              <li>Connect device — should show blue "Added!" message</li>
+              <li>Load files in correct slots:</li>
+            </ul>
+            <div class="code-block">
+              <span class="code-label">Odin slots</span>
+              <button class="copy-btn" data-copy="AP: OneAI_AP_*.tar.md5&#10;BL: OneAI_BL_*.tar.md5&#10;CP: OneAI_CP_*.tar.md5&#10;CSC: OneAI_CSC_*.tar.md5 (NOT HOME_CSC!)" aria-label="Copy Odin slots">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+              <pre><code><strong>AP:</strong>  OneAI_AP_*.tar.md5
+<strong>BL:</strong>  OneAI_BL_*.tar.md5
+<strong>CP:</strong>  OneAI_CP_*.tar.md5
+<strong>CSC:</strong> OneAI_CSC_*.tar.md5</code></pre>
+            </div>
+            <ul>
+              <li>Click <strong>Start</strong> and wait 10–15 minutes</li>
+              <li>Device reboots automatically when done</li>
             </ul>
           </div>
-          
-          <div class="install-step success">
-            <h4><span class="step-icon">4</span>Format Data & First Boot</h4>
-            <p>Complete the installation:</p>
+        </details>
+
+        <details class="install-step step-success">
+          <summary>
+            <span class="step-badge step-badge--success">4</span>
+            Format Data &amp; First Boot
+          </summary>
+          <div class="step-body">
             <ul>
-              <li>Device should boot to TWRP recovery automatically</li>
+              <li>Device boots to TWRP recovery automatically</li>
               <li>Go to <strong>Wipe → Format Data</strong></li>
-              <li>Type <code>yes</code> to confirm data wipe</li>
+              <li>Type <code>yes</code> to confirm</li>
               <li>Select <strong>Reboot System</strong></li>
-              <li><strong>First boot takes 10-15 minutes</strong> - be patient!</li>
-              <li>Complete Android setup and enjoy OneAI!</li>
+              <li><strong>First boot takes 10–15 minutes</strong> — be patient!</li>
             </ul>
           </div>
-        </div>
-        
-        <div class="tab-content" id="custom">
-          <div class="install-step warning">
-            <h4><span class="step-icon">⚠</span>Coming from Custom ROM</h4>
-            <p>Installing over other custom ROMs requires extra care. <strong>Clean installation is highly recommended</strong> to avoid conflicts and bootloops.</p>
+        </details>
+      </div>
+
+      <!-- Tab: Custom ROM -->
+      <div class="itab-content" id="tab-custom" role="tabpanel" aria-labelledby="tab-btn-custom">
+        <details class="install-step step-warning" open>
+          <summary>
+            <span class="step-badge step-badge--warning">⚠</span>
+            From Custom ROM — Extra care needed
+          </summary>
+          <div class="step-body">
+            <p>Coming from another custom ROM requires a <strong>full clean wipe</strong> to avoid bootloops and conflicts.</p>
           </div>
-          
-          <div class="install-step danger">
-            <h4><span class="step-icon">1</span>Complete Wipe Required</h4>
-            <p>Unlike stock ROM, coming from custom ROM needs full cleanup:</p>
+        </details>
+        <details class="install-step step-danger">
+          <summary><span class="step-badge">1</span> Full wipe in TWRP</summary>
+          <div class="step-body">
             <ul>
               <li>Boot into <strong>TWRP recovery</strong></li>
               <li>Go to <strong>Wipe → Format Data</strong></li>
-              <li>Type <code>yes</code> to confirm complete data format</li>
+              <li>Type <code>yes</code> to confirm</li>
             </ul>
           </div>
-          
-          <div class="install-step">
-            <h4><span class="step-icon">2</span>Flash OneAI ROM</h4>
-            <p>Now flash the ROM with Odin:</p>
+        </details>
+        <details class="install-step">
+          <summary><span class="step-badge">2</span> Flash OneAI with Odin</summary>
+          <div class="step-body">
             <ul>
-              <li>Reboot to <strong>Download Mode</strong></li>
+              <li>Reboot to Download Mode</li>
               <li>Connect to PC and open Odin</li>
-              <li>Load OneAI ROM files in appropriate slots</li>
-              <li><strong>Use CSC file (NOT HOME_CSC)</strong> for clean install</li>
-              <li>Click Start and wait for completion</li>
+              <li>Load ROM files, <strong>use CSC (NOT HOME_CSC)</strong></li>
+              <li>Click Start and wait</li>
             </ul>
           </div>
-          
-          <div class="install-step success">
-            <h4><span class="step-icon">3</span>Final Steps</h4>
-            <p>Complete the installation:</p>
+        </details>
+        <details class="install-step step-success">
+          <summary><span class="step-badge step-badge--success">3</span> Final Steps</summary>
+          <div class="step-body">
             <ul>
-              <li>Device should boot to TWRP automatically</li>
-              <li>If you see any errors, <strong>Format Data</strong> again</li>
-              <li>Reboot System</li>
-              <li>First boot will take 10-15 minutes</li>
-              <li>If stuck on boot screen, boot back to TWRP and format data once more</li>
+              <li>Device boots to TWRP automatically</li>
+              <li>If errors appear, run Format Data again</li>
+              <li>Reboot System — first boot: 10–15 minutes</li>
             </ul>
           </div>
-        </div>
-        
-        <div class="tab-content" id="older">
-          <div class="install-step success">
-            <h4><span class="step-icon">✓</span>Easy Update Process</h4>
-            <p>Updating from older OneAI versions is much simpler! Your data and settings can be preserved in most cases.</p>
-          </div>
-          
-          <div class="install-step">
-            <h4><span class="step-icon">1</span>Download Latest ROM</h4>
-            <p>Get the newest OneAI version:</p>
-            <ul>
-              <li>Download the latest OneAI ROM for your device</li>
-              <li>Ensure it's the correct model (G991B, G996B, etc.)</li>
-              <li>Have Odin ready on your PC</li>
-            </ul>
-          </div>
-          
-          <div class="install-step info">
-            <h4><span class="step-icon">2</span>Flash Update</h4>
-            <p><strong>Key difference:</strong> Use HOME_CSC this time to preserve data!</p>
-            <ul>
-              <li>Boot into <strong>Download Mode</strong></li>
-              <li>Connect to PC and open Odin</li>
-              <li>Load ROM files in slots</li>
-              <li><strong>Use HOME_CSC file</strong> (not regular CSC)</li>
-              <li>This preserves your apps and data</li>
-              <li>Click Start and wait for completion</li>
-            </ul>
-          </div>
-          
-          <div class="install-step success">
-            <h4><span class="step-icon">3</span>Reboot and Enjoy</h4>
-            <p>Simple finish:</p>
-            <ul>
-              <li>Device will reboot automatically</li>
-              <li>Your apps and settings should be intact</li>
-              <li>OneAI will show new version in Settings</li>
-              <li>No setup required - you're done!</li>
-            </ul>
-          </div>
-          
-          <div class="install-step warning">
-            <h4><span class="step-icon">🔧</span>Troubleshooting</h4>
-            <p>If you experience issues after updating:</p>
-            <ul>
-              <li><strong>Bootloop or won't start:</strong></li>
-              <ul>
-                <li>Boot into TWRP recovery</li>
-                <li>Go to <strong>Wipe → Format Data</strong></li>
-                <li>Type <code>yes</code> to confirm</li>
-                <li>Reboot system</li>
-              </ul>
-              <li><strong>Apps crashing:</strong> Clear cache in Settings → Storage</li>
-              <li><strong>Performance issues:</strong> Restart device and wait 24h for optimization</li>
-            </ul>
-          </div>
-        </div>
+        </details>
       </div>
-    </div>
 
-    <div class="modal install-modal" id="changelogModal">
-        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="changelog-modal-title">
-            <button class="modal-close" id="closeChangelog">×</button>
-            <h3 id="changelog-modal-title">Changelog</h3>
-            <p class="small">Here are the latest updates and changes for OneAI ROM.</p>
-
-            <div class="changelog-content">
-              <div class="changelog-entry">
-                  <h4>Version 7.3 <span class="date">September 21, 2025</span></h4>
-                  <h5><span class="change-icon new">✨</span>New</h5>
-                  <ul>
-                      <li>Rebased with latest binary for every device.</li>
-                      <li>Renamed Tar files for easier flashing.</li>
-                      <li>Added KnoxPatch and Deknox fully in system — no need for external modules anymore.</li>
-                      <li>Added Secure Folder support again.</li>
-                      <li>Bypassed FRP.</li>
-                      <li>Spoofed locked bootloader and other infos for valid attestations.</li>
-                  </ul>
-                  <h5><span class="change-icon improved">🚀</span>Improved</h5>
-                  <ul>
-                      <li>RAM management optimization.</li>
-                      <li>More general system optimizations.</li>
-                      <li>Now using Proton 5.5 with latest upstream.</li>
-                      <li>Removed more useless stuff from system.</li>
-                  </ul>
-                  <h5><span class="change-icon fixed">🔧</span>Fixed</h5>
-                  <ul>
-                      <li>Fixed RAW photos in Pro Camera mode.</li>
-                      <li>Disabled fullscreen AOD due to bugged brightness.</li>
-                      <li>Fixed some bugs here and there.</li>
-                  </ul>
-                  <h5><span class="change-icon note">📝</span>Other</h5>
-                  <ul>
-                      <li>Dirty-flashable over v7.2 and older releases.</li>
-                      <li>Other minor changes I don’t remember...</li>
-                  </ul>
-              </div>
-
-              <div class="changelog-entry">
-                  <h4>OneAI v7.2 <span class="date">August 27, 2025</span></h4>
-                  <h5><span class="change-icon new">✨</span>New</h5>
-                  <ul>
-                      <li>Built with EROFS for better performance, less heat and smaller partitions.</li>
-                      <li>Removed additional bloat from system (including useless Chinese Galaxy AI components).</li>
-                      <li>Added Game Tools.</li>
-                      <li>Re-added Link to Windows.</li>
-                      <li>Slightly updated OneAI Bootlogo.</li>
-                  </ul>
-                  <h5><span class="change-icon improved">🚀</span>Improved</h5>
-                  <ul>
-                      <li>Updated kernel to latest Proton+ 5.2.1 CI.</li>
-                      <li>Updated S21 FE base to GYH1 with latest binary.</li>
-                      <li>Updated some One UI 8 apps.</li>
-                      <li>Using updated OrangeFox recovery for S21 FE.</li>
-                  </ul>
-                  <h5><span class="change-icon fixed">🔧</span>Fixed</h5>
-                  <ul>
-                      <li>Disabled FullScreen AOD for S21 FE.</li>
-                      <li>Fixed Samsung Cloud backup restore.</li>
-                      <li>Other minor fixes and stability improvements.</li>
-                  </ul>
-              </div>
-
-              <div class="changelog-entry">
-                  <h4>OneAI v7.1 <span class="date">August 14, 2025</span></h4>
-                  <h5><span class="change-icon new">✨</span>New</h5>
-                  <ul>
-                      <li>Rebased with latest binary firmware for every supported phone.</li>
-                      <li>Ported Flip 7 new sounds (replacing S25U ones).</li>
-                      <li>Updated Galaxy AI and Audio Eraser versions from Flip 7.</li>
-                  </ul>
-                  <h5><span class="change-icon improved">🚀</span>Improved</h5>
-                  <ul>
-                      <li>Back to stock Smart Manager (China Smart Manager broke Routines).</li>
-                      <li>Changed filesystem from Ext4 to F2FS for better performance and less heat (system, vendor, odm, and product).</li>
-                      <li>Adjusted photo rendering to be more like S25 devices.</li>
-                      <li>Tweaks in vendor and system build.props for stability and performance.</li>
-                  </ul>
-                  <h5><span class="change-icon fixed">🔧</span>Fixed</h5>
-                  <ul>
-                      <li>Fixed default sound settings.</li>
-                      <li>ROM is now fully dirty-flashable over older versions when updating.</li>
-                  </ul>
-              </div>
-              <div class="changelog-entry">
-                  <h4>OneAI v7 <span class="date">June 1, 2025</span></h4>
-                  <h5><span class="change-icon new">✨</span>New</h5>
-                  <ul>
-                      <li>Rebased with latest firmware (note: bootloader binary prevents downgrading).</li>
-                      <li>Now using Proton+ Kernel with KernelSU (thanks to @EliteGalaxy).</li>
-                      <li>Added Front LOG feature from S25 Edge.</li>
-                      <li>Now using Chinese Smart Manager with App Lock feature.</li>
-                  </ul>
-                  <h5><span class="change-icon improved">🚀</span>Improved</h5>
-                  <ul>
-                      <li>General system and vendor optimizations (faster app opening, better performance, less heat).</li>
-                      <li>New patches for frameworks (APK downgrade and more) thanks to Extreme 🇷🇴☦️🇪🇺.</li>
-                      <li>Fully spoofed to S24+ for AI and stability (allows updating AI apps in Galaxy Store).</li>
-                      <li>Fixed encryption so dirty-flashing over v6.1 is now possible.</li>
-                  </ul>
-                  <h5><span class="change-icon fixed">🔧</span>Fixed</h5>
-                  <ul>
-                      <li>Fixed Weather Wallpaper.</li>
-                  </ul>
-                  <h5><span class="change-icon removed">🗑️</span>Removed</h5>
-                  <ul>
-                      <li>Removed Secure Folder (not fixable at the moment).</li>
-                      <li>Debloated Game Tools and other game-related apps (flashable zip will be provided for users who want them).</li>
-                  </ul>
-              </div>
-              <div class="changelog-entry">
-                  <h4>OneAI v6.1 <span class="date">May 22, 2025</span></h4>
-                  <h5><span class="change-icon new">✨</span>New</h5>
-                  <ul>
-                      <li>Initial support for S21, S21+ and S21 FE.</li>
-                      <li>Brief enabled and ported from One UI 8 (thanks to @Tyjon082 for OneUI8 apps).</li>
-                      <li>Some China Galaxy AI features added and fixed.</li>
-                      <li>Extra Brightness, Outdoor Mode and 4-digit PIN without confirmation added (thanks to Extreme 🇷🇴☦️ [ND11🇪🇺] and @EliteGalaxy).</li>
-                      <li>Enabled Anti-Spam Feature on Dialer.</li>
-                      <li>Game Booster app from China S25U with new features.</li>
-                      <li>New battery stats menu enabled.</li>
-                      <li>GalaxyMaxHz app now included in system.</li>
-                      <li>Samsung Themes app patched (use paid themes forever).</li>
-                      <li>Audio Eraser now working.</li>
-                  </ul>
-                  <h5><span class="change-icon improved">🚀</span>Improved</h5>
-                  <ul>
-                      <li>Performance and heat optimization.</li>
-                      <li>Lots of Camera tweaks.</li>
-                  </ul>
-                  <h5><span class="change-icon fixed">🔧</span>Fixed</h5>
-                  <ul>
-                      <li>Fixed Lockscreen Clock.</li>
-                      <li>Secure Screenshot disabled (screenshots work in all apps now).</li>
-                  </ul>
-                  <h5><span class="change-icon system">⚙️</span>System</h5>
-                  <ul>
-                      <li>Updated Magisk Alpha to v29.</li>
-                      <li>KnoxPatch integrated in system (no more LSPosed needed, only Enhancer module in Magisk required for Watch app & Secure Folder).</li>
-                      <li>Further debloated useless apps and files.</li>
-                  </ul>
-              </div>
+      <!-- Tab: Update -->
+      <div class="itab-content" id="tab-update" role="tabpanel" aria-labelledby="tab-btn-update">
+        <details class="install-step step-success" open>
+          <summary><span class="step-badge step-badge--success">✓</span> Easy Update — Data Preserved</summary>
+          <div class="step-body">
+            <p>Updating from an older OneAI version is much simpler. Your data and settings can be preserved in most cases.</p>
+          </div>
+        </details>
+        <details class="install-step">
+          <summary><span class="step-badge">1</span> Download latest ROM</summary>
+          <div class="step-body">
+            <ul>
+              <li>Download the latest OneAI for your exact model</li>
+              <li>Have Odin ready on PC</li>
+            </ul>
+          </div>
+        </details>
+        <details class="install-step step-info">
+          <summary><span class="step-badge">2</span> Flash with HOME_CSC</summary>
+          <div class="step-body">
+            <p><strong>Key difference:</strong> Use <code>HOME_CSC</code> this time to preserve data!</p>
+            <div class="code-block">
+              <span class="code-label">Odin slots (update)</span>
+              <button class="copy-btn" data-copy="AP: OneAI_AP_*.tar.md5&#10;BL: OneAI_BL_*.tar.md5&#10;CP: OneAI_CP_*.tar.md5&#10;HOME_CSC: OneAI_HOME_CSC_*.tar.md5" aria-label="Copy update slots">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+              <pre><code><strong>AP:</strong>       OneAI_AP_*.tar.md5
+<strong>BL:</strong>       OneAI_BL_*.tar.md5
+<strong>CP:</strong>       OneAI_CP_*.tar.md5
+<strong>HOME_CSC:</strong> OneAI_HOME_CSC_*.tar.md5</code></pre>
             </div>
-        </div>
-    </div>
+          </div>
+        </details>
+        <details class="install-step step-success">
+          <summary><span class="step-badge step-badge--success">3</span> Done!</summary>
+          <div class="step-body">
+            <ul>
+              <li>Device reboots, apps and settings intact</li>
+              <li>If bootloop: TWRP → Wipe → Format Data → Reboot</li>
+            </ul>
+          </div>
+        </details>
+      </div>
 
-    <script src="script.js"></script>
-  </body>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
 </html>
