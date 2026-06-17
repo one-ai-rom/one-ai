@@ -304,12 +304,12 @@ const Carousel = {
    ═══════════════════════════════════════════ */
 const DeviceDownloadSelector = {
   devices: {
-    's21-g991b':   { name: 'Galaxy S21 (SM-G991B)', note: 'One UI 8 · Android 14', url: 'https://drive.google.com/file/d/1YCKz-LFOxCd-jonXhY6LtgT-NPMJtlwJ/view?usp=drivesdk' },
-    's21-g991n':   { name: 'Galaxy S21 (SM-G991N)', note: 'One UI 8 · Android 14', url: 'https://drive.google.com/file/d/1NrdrBYR7NOHXHsPdd7_dwBqxVWx98NLw/view?usp=drivesdk' },
-    's21p-g996b':  { name: 'Galaxy S21+ (SM-G996B)', note: 'One UI 8 · Android 14', url: 'https://drive.google.com/file/d/1uAdBa1Pp27MDYGxala-529dTLUe9taoZ/view?usp=drivesdk' },
-    's21u-g998b':  { name: 'Galaxy S21 Ultra (SM-G998B)', note: 'One UI 8 · Android 14', url: 'https://drive.google.com/file/d/1DZP9p9zfifgVkM0_EyguHmuy9bEDhOlD/view?usp=drivesdk' },
-    's21u-g998n':  { name: 'Galaxy S21 Ultra (SM-G998N)', note: 'One UI 8 · Android 14', url: 'https://drive.google.com/file/d/16NO0Ik4P7MLHYWx3Ij7ie1nUSGwgpSBh/view?usp=drivesdk' },
-    's21fe-g990e': { name: 'Galaxy S21 FE (SM-G990E)', note: 'One UI 8 · Android 14', url: 'https://drive.google.com/file/d/1mzq8ET6AeaaRU5ALZHCYA8B-DJqdZ6a_/view?usp=drivesdk' },
+    's21-g991b':   { name: 'Galaxy S21 (SM-G991B)', note: 'One UI 7 · Android 15', url: 'https://drive.google.com/file/d/1YCKz-LFOxCd-jonXhY6LtgT-NPMJtlwJ/view?usp=drivesdk' },
+    's21-g991n':   { name: 'Galaxy S21 (SM-G991N)', note: 'One UI 7 · Android 15', url: 'https://drive.google.com/file/d/1NrdrBYR7NOHXHsPdd7_dwBqxVWx98NLw/view?usp=drivesdk' },
+    's21p-g996b':  { name: 'Galaxy S21+ (SM-G996B)', note: 'One UI 7 · Android 15', url: 'https://drive.google.com/file/d/1uAdBa1Pp27MDYGxala-529dTLUe9taoZ/view?usp=drivesdk' },
+    's21u-g998b':  { name: 'Galaxy S21 Ultra (SM-G998B)', note: 'One UI 7 · Android 15', url: 'https://drive.google.com/file/d/1DZP9p9zfifgVkM0_EyguHmuy9bEDhOlD/view?usp=drivesdk' },
+    's21u-g998n':  { name: 'Galaxy S21 Ultra (SM-G998N)', note: 'One UI 7 · Android 15', url: 'https://drive.google.com/file/d/16NO0Ik4P7MLHYWx3Ij7ie1nUSGwgpSBh/view?usp=drivesdk' },
+    's21fe-g990e': { name: 'Galaxy S21 FE (SM-G990E)', note: 'One UI 7 · Android 15', url: 'https://drive.google.com/file/d/1mzq8ET6AeaaRU5ALZHCYA8B-DJqdZ6a_/view?usp=drivesdk' },
   },
 
   init() {
