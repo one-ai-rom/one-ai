@@ -600,7 +600,7 @@ h1 {
 .feature-card p  { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
 
 /* ─── CAROUSEL ─── */
-.carousel-wrap { max-width: 680px; margin-inline: auto; }
+/* .carousel-wrap — overridden below with responsive size */
 
 .carousel {
   position: relative;
@@ -1101,4 +1101,185 @@ h1 {
   .modal-panel { padding: var(--s5); }
   .install-tabs { gap: 0; }
   .itab { padding: var(--s3) var(--s4); font-size: 0.8rem; }
+}
+
+
+/* ─── DYNAMIC BACKGROUND CANVAS ─── */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+body > *:not(#bgCanvas) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── LANGUAGE SELECTOR ─── */
+.lang-selector {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s2) var(--s3);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.lang-btn:hover { color: var(--text); border-color: var(--border-mid); }
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  overflow: hidden;
+  z-index: 200;
+  min-width: 150px;
+  animation: fadeDown 0.15s var(--ease);
+}
+
+.lang-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--s3) var(--s4);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.lang-option:hover { background: var(--surface-3); color: var(--text); }
+.lang-option.active { color: var(--accent); font-weight: 700; }
+
+/* Mobile lang row */
+.mobile-lang-row {
+  display: flex;
+  gap: var(--s2);
+  padding: var(--s3) var(--s4);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.lang-option-mobile {
+  padding: var(--s2) var(--s3);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.lang-option-mobile:hover,
+.lang-option-mobile.active {
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: rgba(124,111,245,0.3);
+}
+
+/* ─── ENHANCED GALAXY AI CARD — proper layout ─── */
+.feature-card--ai {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--s5);
+}
+
+.feature-card--ai .feature-icon {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.feature-card--ai-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.feature-card--ai-text h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.feature-card--ai-text p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ─── CAROUSEL — screenshots fit without scrolling ─── */
+.carousel-wrap { max-width: 420px; margin-inline: auto; }
+
+.carousel-slide img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  background: var(--surface-2);
+}
+
+/* ─── SCROLL-DRIVEN FADE-IN (CSS-native) ─── */
+@supports (animation-timeline: scroll()) {
+  .feature-card,
+  .credit-card,
+  .changelog-entry {
+    opacity: 0;
+    animation: fade-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 65%;
+  }
+}
+
+@keyframes fade-reveal {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card,
+  .credit-card,
+  .changelog-entry {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+/* ─── RESPONSIVE ADJUSTMENTS ─── */
+@media (max-width: 900px) {
+  .feature-card--ai { grid-column: span 2; }
+}
+
+@media (max-width: 700px) {
+  .feature-card--ai { grid-column: span 1; flex-direction: column; }
+  .lang-selector { display: none; }
+}
+
+@media (max-width: 480px) {
+  .carousel-wrap { max-width: 100%; }
+  .carousel-slide img { max-height: 360px; }
 }
