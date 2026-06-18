@@ -816,9 +816,11 @@ const i18n = {
       }
     });
 
-    document.addEventListener('click', () => {
-      dropdown?.setAttribute('hidden', '');
-      toggleBtn?.setAttribute('aria-expanded', 'false');
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#langSelector')) {
+        dropdown?.setAttribute('hidden', '');
+        toggleBtn?.setAttribute('aria-expanded', 'false');
+      }
     });
 
     document.querySelectorAll('.lang-option').forEach(btn => {
@@ -931,8 +933,8 @@ const BackgroundCanvas = {
     const particles = this.particles;
     const maxDist = this._mobile ? 100 : 140;
     const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    const dotColor = isDark ? 'rgba(124,111,245,' : 'rgba(124,111,245,';
-    const lineBase = isDark ? 'rgba(94,196,240,' : 'rgba(124,111,245,';
+    const dotColor = isDark ? 'rgba(124,111,245,' : 'rgba(100,90,210,';
+    const lineBase = isDark ? 'rgba(94,196,240,' : 'rgba(100,90,210,';
 
     ctx.clearRect(0, 0, w, h);
 
@@ -974,8 +976,3 @@ const BackgroundCanvas = {
   }
 };
 
-// Init new modules
-document.addEventListener('DOMContentLoaded', () => {
-  i18n.init();
-  BackgroundCanvas.init();
-});

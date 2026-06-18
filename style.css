@@ -93,6 +93,7 @@ html {
   scroll-padding-top: 80px;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+  background-color: var(--bg);
 }
 
 body {
@@ -100,7 +101,7 @@ body {
   font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
   line-height: 1.65;
   color: var(--text);
-  background-color: var(--bg);
+  background-color: transparent;
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
   overflow-x: hidden;
@@ -319,6 +320,7 @@ a, button, [role="button"] {
 /* ─── HERO ─── */
 .hero {
   padding: clamp(var(--s12), 8vw, var(--s24)) 0 clamp(var(--s10), 6vw, var(--s20));
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
 }
 
 .hero-content {
@@ -467,8 +469,9 @@ h1 {
 /* ─── SECTIONS ─── */
 .section {
   padding-block: clamp(var(--s10), 6vw, var(--s20));
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
 }
-.section-alt { background: var(--surface); }
+.section-alt { background: color-mix(in srgb, var(--surface) 90%, transparent); }
 
 .section-header {
   margin-bottom: var(--s10);
@@ -716,6 +719,7 @@ h1 {
 .site-footer {
   border-top: 1px solid var(--border);
   padding-block: var(--s8);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
 }
 .footer-inner {
   max-width: var(--max-w);
@@ -1107,15 +1111,21 @@ h1 {
 /* ─── DYNAMIC BACKGROUND CANVAS ─── */
 #bgCanvas {
   position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 1;
 }
 
-body > *:not(#bgCanvas) {
+/* Canvas sits at z:0, all page content at z:1+ */
+.site-header,
+main,
+.site-footer,
+.fab,
+.modal {
   position: relative;
   z-index: 1;
 }

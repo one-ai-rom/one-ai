@@ -14,8 +14,6 @@
 
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
-  <a class="skip-link" href="#main-content">Skip to content</a>
-
   <!-- ─── HEADER ─── -->
   <header class="site-header" role="banner">
     <div class="header-inner">
@@ -34,17 +32,17 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.958 14.34l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.83.953l-.74.466z"/></svg>
           Telegram
         </a>
-        <button class="nav-link" id="changelogBtn">
+        <button class="nav-link" id="changelogBtn" data-i18n-attr="changelog_btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
-          Changelog
+          <span data-i18n="nav_changelog">Changelog</span>
         </button>
         <button class="nav-link" id="installGuideBtn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Install Guide
+          <span data-i18n="nav_install">Install Guide</span>
         </button>
         <button class="nav-link btn-primary" id="donateBtn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Donate
+          <span data-i18n="nav_donate">Donate</span>
         </button>
         <!-- Language selector -->
         <div class="lang-selector" id="langSelector">
@@ -93,18 +91,18 @@
       <div class="hero-content">
         <div class="hero-left">
           <span class="badge badge-stable" aria-label="Current build status">
-            <span class="badge-dot"></span>Stable Build · v7.3
+            <span class="badge-dot"></span><span data-i18n="badge_stable">Stable Build · v7.3</span>
           </span>
-          <h1 id="hero-heading">Faster. Cleaner.<br><span class="gradient-text">More in control.</span></h1>
-          <p class="hero-lead">OneAI is a carefully curated <strong>One UI 7</strong> port based on <strong>Android 15</strong> with performance tweaks, enhanced Galaxy AI, and minimal compromises. Odin-friendly with an active community.</p>
+          <h1 id="hero-heading" data-i18n="hero_title">Faster. Cleaner.<br><span class="gradient-text">More in control.</span></h1>
+          <p class="hero-lead" data-i18n="hero_lead">OneAI is a carefully curated <strong>One UI 7</strong> port based on <strong>Android 15</strong> with performance tweaks, enhanced Galaxy AI, and minimal compromises. Odin-friendly with an active community.</p>
           <div class="hero-actions">
             <button class="btn-cta" id="heroDownloadBtn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download ROM
+              <span data-i18n="btn_download">Download ROM</span>
             </button>
             <button class="btn-ghost" id="heroInstallBtn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Install Guide
+              <span data-i18n="btn_install_guide">Install Guide</span>
             </button>
           </div>
         </div>
@@ -147,14 +145,14 @@
     <section class="section" id="download" aria-labelledby="download-heading">
       <div class="container">
         <div class="section-header">
-          <h2 id="download-heading">Download</h2>
+          <h2 id="download-heading" data-i18n="dl_title">Download</h2>
           <p class="section-sub" data-i18n="dl_sub">Select your device to get the right build</p>
         </div>
 
         <div class="device-selector">
-          <label class="selector-label" for="deviceSelect">Your device</label>
+          <label class="selector-label" for="deviceSelect" data-i18n="dl_label">Your device</label>
           <select id="deviceSelect" class="device-select" aria-label="Select your device model">
-            <option value="">— Pick your model —</option>
+            <option value="" data-i18n="dl_pick">— Pick your model —</option>
             <optgroup label="Galaxy S21">
               <option value="s21-g991b">Galaxy S21 (SM-G991B)</option>
               <option value="s21-g991n">Galaxy S21 (SM-G991N)</option>
@@ -174,7 +172,7 @@
           <div class="download-result" id="downloadResult" aria-live="polite">
             <div class="download-placeholder">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
-              <p>Select your device model above</p>
+              <p data-i18n="dl_placeholder">Select your device model above</p>
             </div>
           </div>
         </div>
@@ -185,7 +183,7 @@
     <section class="section section-alt" aria-labelledby="features-heading">
       <div class="container">
         <div class="section-header">
-          <h2 id="features-heading">What's inside</h2>
+          <h2 id="features-heading" data-i18n="feat_title">What's inside</h2>
           <p class="section-sub" data-i18n="feat_sub">Everything you need, nothing you don't</p>
         </div>
 
@@ -204,40 +202,40 @@
             <div class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
-            <h3>Properly Optimized</h3>
-            <p>Surpasses Samsung's own optimizations — minimal RAM &amp; battery usage, enhanced performance with Proton kernel 5.5.</p>
+            <h3 data-i18n="feat_opt_title">Properly Optimized</h3>
+            <p data-i18n="feat_opt_desc">Surpasses Samsung's own optimizations — minimal RAM &amp; battery usage, enhanced performance with Proton kernel 5.5.</p>
           </article>
 
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
             </div>
-            <h3>Deknoxed &amp; KnoxPatch</h3>
-            <p>Knox removed for better performance, heat management and system control. Knox-related apps still work via built-in KnoxPatch.</p>
+            <h3 data-i18n="feat_knox_title">Deknoxed &amp; KnoxPatch</h3>
+            <p data-i18n="feat_knox_desc">Knox removed for better performance, heat management and system control. Knox-related apps still work via built-in KnoxPatch.</p>
           </article>
 
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
             </div>
-            <h3>Audio Mods</h3>
-            <p>More audio modes unlocked, compression disabled, sounds ported from ZFlip 7 for superior quality.</p>
+            <h3 data-i18n="feat_audio_title">Audio Mods</h3>
+            <p data-i18n="feat_audio_desc">More audio modes unlocked, compression disabled, sounds ported from ZFlip 7 for superior quality.</p>
           </article>
 
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
             </div>
-            <h3>Patch-set</h3>
-            <p>Built-in patches for 4-digit PIN, app downgrades, FRP bypass, valid attestations, and enhanced battery info.</p>
+            <h3 data-i18n="feat_patch_title">Patch-set</h3>
+            <p data-i18n="feat_patch_desc">Built-in patches for 4-digit PIN, app downgrades, FRP bypass, valid attestations, and enhanced battery info.</p>
           </article>
 
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <h3>Active Community</h3>
-            <p>Join the Telegram group for discussion, help, updates and direct contact with the development team.</p>
+            <h3 data-i18n="feat_comm_title">Active Community</h3>
+            <p data-i18n="feat_comm_desc">Join the Telegram group for discussion, help, updates and direct contact with the development team.</p>
           </article>
         </div>
       </div>
@@ -247,7 +245,7 @@
     <section class="section" aria-labelledby="preview-heading">
       <div class="container">
         <div class="section-header">
-          <h2 id="preview-heading">Preview</h2>
+          <h2 id="preview-heading" data-i18n="prev_title">Preview</h2>
           <p class="section-sub" data-i18n="prev_sub">See OneAI in action</p>
         </div>
 
@@ -273,7 +271,7 @@
     <section class="section section-alt" aria-labelledby="credits-heading">
       <div class="container container--narrow">
         <div class="section-header">
-          <h2 id="credits-heading">Credits</h2>
+          <h2 id="credits-heading" data-i18n="credits_title">Credits</h2>
           <p class="section-sub" data-i18n="credits_sub">The team behind OneAI</p>
         </div>
         <div class="credits-grid">
@@ -282,7 +280,7 @@
             <div>
               <strong>MatteoMeo</strong>
               <span class="credit-role">Main Developer</span>
-              <p class="credit-desc">ROM building, system optimizations, bug fixes and releases.</p>
+              <p class="credit-desc" data-i18n="credit_matteo">ROM building, system optimizations, bug fixes and releases.</p>
             </div>
           </div>
           <div class="credit-card">
@@ -290,7 +288,7 @@
             <div>
               <strong>Fwp</strong>
               <span class="credit-role">Developer</span>
-              <p class="credit-desc">Testing and kernel work.</p>
+              <p class="credit-desc" data-i18n="credit_fwp">Testing and kernel work.</p>
             </div>
           </div>
           <div class="credit-card">
@@ -298,7 +296,7 @@
             <div>
               <strong>Extreme</strong>
               <span class="credit-role">Helper</span>
-              <p class="credit-desc">KnoxPatch, verify app signature disabler patches (ExtremeROM).</p>
+              <p class="credit-desc" data-i18n="credit_extreme">KnoxPatch, verify app signature disabler patches (ExtremeROM).</p>
             </div>
           </div>
           <div class="credit-card">
@@ -306,7 +304,7 @@
             <div>
               <strong>Devcore</strong>
               <span class="credit-role">Helper</span>
-              <p class="credit-desc">OneUI8 apps and assistance on various topics.</p>
+              <p class="credit-desc" data-i18n="credit_devcore">OneUI8 apps and assistance on various topics.</p>
             </div>
           </div>
           <div class="credit-card">
@@ -314,7 +312,7 @@
             <div>
               <strong>BeyondRom Dev</strong>
               <span class="credit-role">Helper</span>
-              <p class="credit-desc">Building and fixing Odin-flashable ROM.</p>
+              <p class="credit-desc" data-i18n="credit_beyond">Building and fixing Odin-flashable ROM.</p>
             </div>
           </div>
           <div class="credit-card">
@@ -322,7 +320,7 @@
             <div>
               <strong>EliteGalaxy</strong>
               <span class="credit-role">Helper</span>
-              <p class="credit-desc">General support and assistance.</p>
+              <p class="credit-desc" data-i18n="credit_elite">General support and assistance.</p>
             </div>
           </div>
           <div class="credit-card">
@@ -330,7 +328,7 @@
             <div>
               <strong>Kusoi</strong>
               <span class="credit-role">Web &amp; Bot</span>
-              <p class="credit-desc">Website, bots, and practically everything tech-adjacent.</p>
+              <p class="credit-desc" data-i18n="credit_kusoi">Website, bots, and practically everything tech-adjacent.</p>
             </div>
           </div>
         </div>
@@ -346,7 +344,7 @@
       <div class="footer-links">
         <a href="https://t.me/OneAI_community" target="_blank" rel="noopener noreferrer">Telegram</a>
         <button id="footerInstallBtn">Install Guide</button>
-        <a href="#main-content">Back to top ↑</a>
+        <a href="#main-content" data-i18n="footer_top">Back to top ↑</a>
       </div>
     </div>
   </footer>
@@ -366,8 +364,8 @@
       <button class="modal-close" data-close="donateModal" aria-label="Close">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <h3 id="donate-title">Support OneAI</h3>
-      <p class="modal-sub">Your support keeps development active. Choose a developer to support:</p>
+      <h3 id="donate-title" data-i18n="donate_title">Support OneAI</h3>
+      <p class="modal-sub" data-i18n="donate_sub">Your support keeps development active. Choose a developer to support:</p>
       <div class="donate-grid">
         <a class="donate-card" href="https://paypal.me/matteomeogrossi02" target="_blank" rel="noopener noreferrer">
           <div class="donate-avatar">M</div>
